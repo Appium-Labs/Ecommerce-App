@@ -14,4 +14,12 @@ class CategoryController extends GetxController {
     list.add(CatergoryModel(name: "Headphones", isSelected: false.obs));
     list.add(CatergoryModel(name: "Tablets", isSelected: false.obs));
   }
+
+  void onTapped(int index) {
+    for (var i = 0; i < list.length; i++) {
+      list[i].isSelected = false.obs;
+    }
+    list[index].isSelected = true.obs;
+    update();
+  }
 }

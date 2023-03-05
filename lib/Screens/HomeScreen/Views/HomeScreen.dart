@@ -14,7 +14,7 @@ class HomeScreen extends StatelessWidget {
         slivers: [
           SliverAppBar(
             backgroundColor: Colors.transparent,
-            toolbarHeight: 80,
+            toolbarHeight: 120,
             title: Row(
               children: [
                 Container(
@@ -73,10 +73,7 @@ class HomeScreen extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return Obx(() => GestureDetector(
                         onTap: () {
-                          for (var i = 0; i < controller.list.length; i++) {
-                            controller.list[i].isSelected = false.obs;
-                          }
-                          controller.list[index].isSelected = true.obs;
+                          controller.onTapped(index);
                         },
                         child: Container(
                           margin: EdgeInsets.symmetric(horizontal: 10),
