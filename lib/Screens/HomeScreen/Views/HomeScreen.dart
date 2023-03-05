@@ -1,18 +1,13 @@
+import 'package:ecommerce_app/Screens/HomeScreen/Controller/CategoryController.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
-    int selectedIndex = 0;
-    List<String> catergories = [
-      "Smart Phone",
-      "Laptops",
-      "Watches",
-      "Headphones"
-    ];
+    CategoryController controller = Get.put(CategoryController());
     return Scaffold(
       backgroundColor: Color(0xffF2F2F2),
       body: CustomScrollView(
@@ -74,26 +69,30 @@ class HomeScreen extends StatelessWidget {
             margin: const EdgeInsets.symmetric(horizontal: 40),
             child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: catergories.length,
+                itemCount: controller.list.length,
                 itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: InkWell(
-                      onTap: () {
-                        selectedIndex = index;
-                      },
-                      child: Text(
-                        catergories[index],
-                        style: TextStyle(
-                            fontWeight: index == selectedIndex
-                                ? FontWeight.bold
-                                : FontWeight.w400,
-                            color: index == selectedIndex
-                                ? Colors.purple
-                                : Colors.grey),
-                      ),
-                    ),
-                  );
+                  return Obx(() => GestureDetector(
+                        onTap: () {
+                          for (var i = 0; i < controller.list.length; i++) {
+                            controller.list[i].isSelected = false.obs;
+                          }
+                          controller.list[index].isSelected = true.obs;
+                        },
+                        child: Container(
+                          margin: EdgeInsets.symmetric(horizontal: 10),
+                          child: Text(
+                            controller.list[index].name,
+                            style: TextStyle(
+                                color: controller.list[index].isSelected.value
+                                    ? Colors.purple
+                                    : Colors.grey,
+                                fontWeight:
+                                    controller.list[index].isSelected.value
+                                        ? FontWeight.bold
+                                        : FontWeight.w400),
+                          ),
+                        ),
+                      ));
                 }),
           )),
           SliverToBoxAdapter(
@@ -106,10 +105,8 @@ class HomeScreen extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: InkWell(
-                      onTap: () {
-                        selectedIndex = index;
-                      },
+                    child: GestureDetector(
+                      onTap: () {},
                       child: Container(
                         height: 300,
                         width: 200,
@@ -137,33 +134,6 @@ class HomeScreen extends StatelessWidget {
           )
         ],
       ),
-      bottomNavigationBar:
-          BottomNavigationBar(fixedColor: Color(0xffF2F2F2), items: [
-        BottomNavigationBarItem(
-            icon: IconButton(
-              icon: SvgPicture.asset("assets/icons/House.svg"),
-              onPressed: () {},
-            ),
-            label: ""),
-        BottomNavigationBarItem(
-            icon: IconButton(
-              icon: SvgPicture.asset("assets/icons/Heart.svg"),
-              onPressed: () {},
-            ),
-            label: ""),
-        BottomNavigationBarItem(
-            icon: IconButton(
-              icon: SvgPicture.asset("assets/icons/Profile.svg"),
-              onPressed: () {},
-            ),
-            label: ""),
-        BottomNavigationBarItem(
-            icon: IconButton(
-              icon: SvgPicture.asset("assets/icons/Buy.svg"),
-              onPressed: () {},
-            ),
-            label: "")
-      ]),
     );
   }
 }
