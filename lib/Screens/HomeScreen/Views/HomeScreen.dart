@@ -1,6 +1,7 @@
 import 'package:ecommerce_app/Screens/HomeScreen/Controller/CategoryController.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:get/get.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -20,7 +21,7 @@ class HomeScreen extends StatelessWidget {
                 Container(
                   margin: const EdgeInsets.only(left: 15, right: 10),
                   child: IconButton(
-                    onPressed: () {},
+                    onPressed: () => ZoomDrawer.of(context)!.toggle(),
                     iconSize: 12,
                     icon: SvgPicture.asset("assets/icons/MenuIcon.svg"),
                   ),
@@ -77,7 +78,16 @@ class HomeScreen extends StatelessWidget {
                           print(index);
                         },
                         child: Container(
-                          margin: EdgeInsets.symmetric(horizontal: 10),
+                          decoration: controller.list[index].isSelected.value
+                              ? const BoxDecoration(
+                                  border: Border(
+                                      bottom: BorderSide(
+                                  color: Colors.purple,
+                                  width: 1.2, // Underline thickness
+                                )))
+                              : BoxDecoration(),
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 4),
                           child: Text(
                             controller.list[index].name,
                             style: TextStyle(
