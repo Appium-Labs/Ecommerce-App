@@ -1,1 +1,1 @@
-final baseUrl = "https://ecommerce-app-backend.vercel.app/";
+const baseUrl = "https://ecommerce-app-backend.vercel.app/";
