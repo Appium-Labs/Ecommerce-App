@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/Screens/HomeScreen/Controller/CategoryController.dart';
+import 'package:ecommerce_app/Screens/HomeScreen/Views/ProductCard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
@@ -115,11 +116,7 @@ class HomeScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: GestureDetector(
                       onTap: () {},
-                      child: Container(
-                        height: 300,
-                        width: 200,
-                        color: Colors.amber,
-                      ),
+                      child: ProductCard(),
                     ),
                   );
                 }),
