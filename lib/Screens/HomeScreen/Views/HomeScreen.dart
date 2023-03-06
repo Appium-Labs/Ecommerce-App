@@ -74,6 +74,7 @@ class HomeScreen extends StatelessWidget {
                   return Obx(() => GestureDetector(
                         onTap: () {
                           controller.onTapped(index);
+                          print(index);
                         },
                         child: Container(
                           margin: EdgeInsets.symmetric(horizontal: 10),
