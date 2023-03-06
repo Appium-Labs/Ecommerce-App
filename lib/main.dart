@@ -1,3 +1,5 @@
+import 'package:ecommerce_app/Constants/Palette.dart';
+import 'package:ecommerce_app/Drawer/DrawerHolder.dart';
 import 'package:ecommerce_app/NavigationMenu.dart';
 import 'package:ecommerce_app/Screens/HomeScreen/Views/HomeScreen.dart';
 import 'package:flutter/material.dart';
@@ -13,12 +15,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: NavigationMenu());
+            primarySwatch: Palette.kToDark, primaryColor: Palette.kToDark),
+        home: DrawerHolder());
   }
 }

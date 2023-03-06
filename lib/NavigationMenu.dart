@@ -7,7 +7,8 @@ import 'package:flutter_svg/svg.dart';
 //erhewr
 
 class NavigationMenu extends StatefulWidget {
-  const NavigationMenu({super.key});
+  int currIndex;
+  NavigationMenu({super.key, required this.currIndex});
 
   @override
   State<NavigationMenu> createState() => _NavigationMenuState();
@@ -23,6 +24,13 @@ class _NavigationMenuState extends State<NavigationMenu> {
   ];
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _index = widget.currIndex;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: screens[_index],
@@ -36,15 +44,15 @@ class _NavigationMenuState extends State<NavigationMenu> {
             },
             items: [
               BottomNavigationBarItem(
-                  icon: SvgPicture.asset("assets/icons/Heart.svg"),
-                  label: "",
-                  backgroundColor: Color(0xffF2F2F2)),
-              BottomNavigationBarItem(
-                  icon: SvgPicture.asset("assets/icons/Heart.svg"),
-                  label: "",
-                  backgroundColor: Color(0xffF2F2F2)),
-              BottomNavigationBarItem(
                   icon: SvgPicture.asset("assets/icons/Profile.svg"),
+                  label: "",
+                  backgroundColor: Color(0xffF2F2F2)),
+              BottomNavigationBarItem(
+                  icon: SvgPicture.asset("assets/icons/Heart.svg"),
+                  label: "",
+                  backgroundColor: Color(0xffF2F2F2)),
+              BottomNavigationBarItem(
+                  icon: SvgPicture.asset("assets/icons/Setting.svg"),
                   label: "",
                   backgroundColor: Color(0xffF2F2F2)),
               BottomNavigationBarItem(

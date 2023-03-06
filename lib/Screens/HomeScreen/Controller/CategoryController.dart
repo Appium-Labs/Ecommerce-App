@@ -17,9 +17,9 @@ class CategoryController extends GetxController {
 
   void onTapped(int index) {
     for (var i = 0; i < list.length; i++) {
-      list[i].isSelected = false.obs;
+      list[i].isSelected.value = false;
     }
-    list[index].isSelected = true.obs;
+    list[index].isSelected.value = true;
     update();
   }
 }
