@@ -10,6 +10,8 @@ class LoginController extends GetxController {
   final pageState = "LOGIN".obs;
   final user = User().obs;
   final hidePassword = true.obs;
+  final statusCode = 0.obs;
+  bool isLoginButtonClicked = false;
 
   changePageState(currentState) {
     if (currentState == "LOGIN") {
@@ -21,20 +23,40 @@ class LoginController extends GetxController {
 
   loginUser() {
     final req = user.toJson();
-    Future<Response> loggedInUser =
-        loginUserResponse(BASE_URL + LOGIN_API_END_POINT, req);
-    print(loggedInUser);
-    print("login succesfully");
+    final loggedInUser = loginUserResponse(BASE_URL + LOGIN_API_END_POINT, req);
+    loggedInUser.then((data) => {
+          if (data.statusCode == 201)
+            {
+              statusCode.value = data.statusCode!,
+              print(statusCode),
+              user.value = User.fromJson(data.data["data"]["user"]),
+              print(user.value.email),
+            }
+          else
+            {
+              statusCode.value = data.statusCode!,
+            }
+        });
   }
 
   signUpUser() {
-    print(user.value.email);
-    print(user.value.password);
-    print(user.value.name);
     final req = user.toJson();
-    Future<Response> signedUpUser =
+    final signedUpUser =
         signUpUserResponse(BASE_URL + SIGNUP_API_END_POINT, req);
-    print(signedUpUser);
-    print("signed up succesfully");
+    int? statusCode;
+    signedUpUser.then((data) => {
+          if (data.statusCode == 201)
+            {
+              statusCode = data.statusCode!,
+              print(data.data["data"]["user"]),
+              user.value = User.fromJson(data.data["data"]["user"]),
+              print(user.value.email),
+            }
+          else
+            {
+              statusCode = data.statusCode!,
+            }
+        });
+    return statusCode;
   }
 }

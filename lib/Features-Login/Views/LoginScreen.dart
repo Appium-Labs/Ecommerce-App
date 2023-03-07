@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/Constants.dart';
+import 'package:ecommerce_app/Drawer/DrawerHolder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -7,10 +8,12 @@ import 'package:get/get.dart';
 
 import '../Controllers/LoginController.dart';
 
+// Obx(()=>LoginContainer());
 class LoginScreen extends StatelessWidget {
-  final loginController = Get.put(LoginController());
   @override
   Widget build(BuildContext context) {
+    final loginController = Get.put(LoginController());
+
     return Scaffold(
       backgroundColor: primaryColor,
       body: SafeArea(
@@ -205,11 +208,14 @@ class LoginContainer extends StatelessWidget {
                     Get.snackbar(
                         "Invalid request!", "Please enter the correct details");
                   } else {
+                    loginController.isLoginButtonClicked = true;
                     loginController.user.value.email = emailController.text;
                     loginController.user.value.password =
                         passwordController.text;
-
                     loginController.loginUser();
+                    Future.delayed(const Duration(seconds: 5), () {
+                      Get.to(DrawerHolder());
+                    });
                   }
                 },
                 child: Container(
