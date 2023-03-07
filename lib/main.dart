@@ -1,7 +1,14 @@
 import 'package:ecommerce_app/Features-Login/Views/SplashScreen.dart';
-import 'package:ecommerce_app/HomeScreen.dart';
+import 'package:ecommerce_app/x.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import 'package:ecommerce_app/Drawer/DrawerHolder.dart';
+import 'package:ecommerce_app/NavigationMenu.dart';
+import 'package:ecommerce_app/Screens/HomeScreen/Views/HomeScreen.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
+import 'package:get/route_manager.dart';
 
 void main() {
   runApp(GetMaterialApp(home: const MyApp()));
@@ -10,7 +17,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -18,7 +24,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
-      home: const SplashScreen(),
+      home: const DrawerHolder(),
     );
   }
 }
