@@ -1,7 +1,9 @@
+import 'package:ecommerce_app/Screens/HomeScreen/Models/Product.dart';
 import 'package:flutter/material.dart';
 
 class ProductCard extends StatelessWidget {
-  const ProductCard({super.key});
+  final Product product;
+  const ProductCard({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +32,12 @@ class ProductCard extends StatelessWidget {
             top: 0,
             child: Container(
               height: 200,
+              width: 220,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(30),
                 child: Image.network(
-                  "https://ecommerce-app-backend.vercel.app/images/image-1677930334934.jpg",
+                  "https://ecommerce-app-backend.vercel.app/" +
+                      product.photos![0].url.toString(),
                   errorBuilder: (context, error, stackTrace) {
                     return Container(
                       color: Colors.amber,
@@ -62,7 +66,7 @@ class ProductCard extends StatelessWidget {
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
-                      "iPhone 14 Pro",
+                      product.title.toString(),
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
@@ -74,7 +78,7 @@ class ProductCard extends StatelessWidget {
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 3,
-                      "Really cool smartphone rwetj ewthw",
+                      product.description.toString(),
                       style:
                           TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
                     ),

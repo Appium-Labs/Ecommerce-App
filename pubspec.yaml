@@ -14,8 +14,6 @@ dependencies:
   flutter_svg: ^2.0.2
   get: ^4.6.5
   flutter_zoom_drawer: ^3.0.4+1
-  dio: ^5.0.1
-
 
 dev_dependencies:
   flutter_test:
@@ -56,4 +54,3 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
-

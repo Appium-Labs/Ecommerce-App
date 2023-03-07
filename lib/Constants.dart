@@ -9,3 +9,4 @@ const BASE_URL = "https://ecommerce-app-backend.vercel.app";
 
 const LOGIN_API_END_POINT = "/api/users/login";
 const SIGNUP_API_END_POINT = "/api/users";
+const GET_ALL_PRODUCTS_END_POINTS = "/api/products";
