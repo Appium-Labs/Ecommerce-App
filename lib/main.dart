@@ -1,4 +1,8 @@
-import 'package:ecommerce_app/Constants/Palette.dart';
+import 'package:ecommerce_app/Features-Login/Views/SplashScreen.dart';
+import 'package:ecommerce_app/x.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
 import 'package:ecommerce_app/Drawer/DrawerHolder.dart';
 import 'package:ecommerce_app/NavigationMenu.dart';
 import 'package:ecommerce_app/Screens/HomeScreen/Views/HomeScreen.dart';
@@ -7,7 +11,7 @@ import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:get/route_manager.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(GetMaterialApp(home: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -15,11 +19,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
-        theme: ThemeData(
-            primarySwatch: Palette.kToDark, primaryColor: Palette.kToDark),
-        home: DrawerHolder());
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.red,
+      ),
+      home: const DrawerHolder(),
+    );
   }
 }
