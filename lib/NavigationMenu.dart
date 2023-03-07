@@ -17,15 +17,14 @@ class NavigationMenu extends StatefulWidget {
 class _NavigationMenuState extends State<NavigationMenu> {
   int _index = 0;
   final screens = [
-    HomeScreen(),
-    FavorittesScreen(),
-    ProfileScreen(),
-    CartScreen()
+    const HomeScreen(),
+    const FavorittesScreen(),
+    const ProfileScreen(),
+    const CartScreen()
   ];
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _index = widget.currIndex;
   }
