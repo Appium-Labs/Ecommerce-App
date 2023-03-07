@@ -81,6 +81,8 @@ class UpperContainer extends StatelessWidget {
 
 class LoginContainer extends StatelessWidget {
   final loginController = Get.find<LoginController>();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -124,6 +126,7 @@ class LoginContainer extends StatelessWidget {
                 ],
               ),
               TextFormField(
+                controller: emailController,
                 scrollPadding: EdgeInsets.all(0),
                 cursorColor: primaryColor,
                 style: TextStyle(
@@ -158,39 +161,72 @@ class LoginContainer extends StatelessWidget {
                   )
                 ],
               ),
-              TextFormField(
-                obscureText: true,
-                cursorColor: primaryColor,
-                style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black,
-                    fontSize: 17),
-                decoration: const InputDecoration(
-                    isDense: true,
-                    contentPadding:
-                        EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                    border: UnderlineInputBorder(
-                        borderSide: BorderSide(color: primaryColor)),
-                    focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: primaryColor))),
+              Obx(
+                () => TextFormField(
+                  controller: passwordController,
+                  obscureText: loginController.hidePassword.value,
+                  cursorColor: primaryColor,
+                  style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black,
+                      fontSize: 17),
+                  decoration: InputDecoration(
+                      suffix: GestureDetector(
+                        onTap: () {
+                          loginController.hidePassword.value =
+                              !loginController.hidePassword.value;
+                        },
+                        child: Text(
+                          loginController.hidePassword.value == true
+                              ? "Show"
+                              : "Hide",
+                          style: TextStyle(
+                              color: primaryColor, fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                      isDense: true,
+                      contentPadding:
+                          EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                      border: UnderlineInputBorder(
+                          borderSide: BorderSide(color: primaryColor)),
+                      focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: primaryColor))),
+                ),
               ),
               SizedBox(
                 height: 50,
               ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 22),
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: primaryColor,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                width: MediaQuery.of(context).size.width / 1.3,
-                child: Text(
-                  "Login",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 20),
+              GestureDetector(
+                onTap: () {
+                  print(emailController.text);
+                  print(emailController.value);
+                  if (emailController.text == "" ||
+                      passwordController.text == "") {
+                    Get.snackbar(
+                        "Invalid request!", "Please enter the correct details");
+                  } else {
+                    loginController.user.value.email = emailController.text;
+                    loginController.user.value.password =
+                        passwordController.text;
+
+                    loginController.loginUser();
+                  }
+                },
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 22),
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: primaryColor,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  width: MediaQuery.of(context).size.width / 1.3,
+                  child: Text(
+                    "Login",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 20),
+                  ),
                 ),
               ),
               SizedBox(
@@ -221,7 +257,9 @@ class LoginContainer extends StatelessWidget {
 
 class SignupContainer extends StatelessWidget {
   final loginController = Get.find<LoginController>();
-
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -265,6 +303,7 @@ class SignupContainer extends StatelessWidget {
                 ],
               ),
               TextFormField(
+                controller: emailController,
                 cursorColor: primaryColor,
                 style: TextStyle(
                     fontWeight: FontWeight.w600,
@@ -299,6 +338,7 @@ class SignupContainer extends StatelessWidget {
                 ],
               ),
               TextFormField(
+                controller: nameController,
                 cursorColor: primaryColor,
                 style: TextStyle(
                     fontWeight: FontWeight.w600,
@@ -332,39 +372,71 @@ class SignupContainer extends StatelessWidget {
                   )
                 ],
               ),
-              TextFormField(
-                obscureText: true,
-                cursorColor: primaryColor,
-                style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black,
-                    fontSize: 17),
-                decoration: const InputDecoration(
-                    isDense: true,
-                    contentPadding:
-                        EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                    border: UnderlineInputBorder(
-                        borderSide: BorderSide(color: primaryColor)),
-                    focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: primaryColor))),
+              Obx(
+                () => TextFormField(
+                  controller: passwordController,
+                  obscureText: loginController.hidePassword.value,
+                  cursorColor: primaryColor,
+                  style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black,
+                      fontSize: 17),
+                  decoration: InputDecoration(
+                      suffix: GestureDetector(
+                        onTap: () {
+                          loginController.hidePassword.value =
+                              !loginController.hidePassword.value;
+                        },
+                        child: Text(
+                          loginController.hidePassword.value == true
+                              ? "Show"
+                              : "Hide",
+                          style: TextStyle(
+                              color: primaryColor, fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                      isDense: true,
+                      contentPadding:
+                          EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                      border: UnderlineInputBorder(
+                          borderSide: BorderSide(color: primaryColor)),
+                      focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: primaryColor))),
+                ),
               ),
               SizedBox(
                 height: 50,
               ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 22),
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: primaryColor,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                width: MediaQuery.of(context).size.width / 1.3,
-                child: Text(
-                  "Signup",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 20),
+              InkWell(
+                onTap: () {
+                  if (emailController.text == "" ||
+                      passwordController.text == "") {
+                    Get.snackbar(
+                        "Invalid request!", "Please enter the correct details");
+                  } else {
+                    print("fg");
+                    loginController.user.value.email = emailController.text;
+                    loginController.user.value.password =
+                        passwordController.text;
+                    loginController.user.value.name = nameController.text;
+                    loginController.signUpUser();
+                  }
+                },
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 22),
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: primaryColor,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  width: MediaQuery.of(context).size.width / 1.3,
+                  child: Text(
+                    "Signup",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 20),
+                  ),
                 ),
               ),
               SizedBox(
