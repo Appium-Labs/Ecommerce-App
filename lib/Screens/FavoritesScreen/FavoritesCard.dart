@@ -7,9 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-class AddedProductCard extends StatelessWidget {
+class FavoritesCard extends StatelessWidget {
   final Product product;
-  const AddedProductCard({super.key, required this.product});
+  const FavoritesCard({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +21,8 @@ class AddedProductCard extends StatelessWidget {
       },
       child: Container(
         height: 150,
-        padding: EdgeInsets.only(bottom: 10),
         width: MediaQuery.of(context).size.width,
+        padding: EdgeInsets.only(right: 15),
         margin: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
@@ -53,7 +53,7 @@ class AddedProductCard extends StatelessWidget {
                 children: [
                   Container(
                     margin: const EdgeInsets.only(
-                        top: 35, bottom: 5, left: 0, right: 10),
+                        top: 30, bottom: 5, left: 0, right: 10),
                     child: Text(
                       product.company.toString() +
                           " " +
@@ -75,34 +75,26 @@ class AddedProductCard extends StatelessWidget {
                           fontWeight: FontWeight.w600),
                     ),
                   ),
-                  Container(
-                    child: Text(
-                      "QTY:  1",
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  Spacer(),
-                  GestureDetector(
-                    onTap: () {},
-                    // padding: EdgeInsets.all(5),
-                    child: Row(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(bottom: 15),
-                          child: Icon(
-                            Icons.delete,
-                            color: Colors.red,
-                            size: 15,
-                          ),
+                  // Spacer(),
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        alignment: Alignment.center,
+                        width: 150,
+                        height: 50,
+                        decoration: BoxDecoration(
+                            color: Colors.purple,
+                            borderRadius: BorderRadius.circular(20)),
+                        margin: EdgeInsets.only(bottom: 20, top: 10),
+                        child: Text(
+                          "Add To Cart",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: 1.2),
                         ),
-                        Container(
-                          margin: EdgeInsets.only(left: 2, bottom: 15),
-                          child: Text(
-                            "Remove from cart",
-                            style: TextStyle(color: Colors.red),
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
                   )
                 ],

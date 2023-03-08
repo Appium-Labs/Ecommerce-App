@@ -188,7 +188,7 @@ class DetailsScreen extends StatelessWidget {
                                 BoxShadow(
                                     offset: Offset(0, 10),
                                     color: const Color(0xff5956E9)
-                                        .withOpacity(0.5),
+                                        .withOpacity(0.3),
                                     blurRadius: 20)
                               ]),
                           child: const Text(
