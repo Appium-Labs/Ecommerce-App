@@ -1,5 +1,8 @@
 import 'package:ecommerce_app/Drawer/DrawerItem.dart';
+import 'package:ecommerce_app/Features-Login/Model/UserModel.dart';
 import 'package:ecommerce_app/NavigationMenu.dart';
+import 'package:ecommerce_app/Screens/CartScreen/CartScreen.dart';
+import 'package:ecommerce_app/Screens/FavoritesScreen/FavoritesScreen.dart';
 import 'package:ecommerce_app/Screens/ProfileScreen/ProfileScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -20,7 +23,7 @@ class MainDrawer extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 150,
               ),
               GestureDetector(
@@ -47,9 +50,11 @@ class MainDrawer extends StatelessWidget {
                     )),
               ),
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Get.to(CartScreen());
+                },
                 child: DrawerItem(
-                    label: "Delivery",
+                    label: "Cart",
                     verticalMargin: 10,
                     icon: IconButton(
                       icon: SvgPicture.asset("assets/icons/Buy_white.svg"),
@@ -57,7 +62,9 @@ class MainDrawer extends StatelessWidget {
                     )),
               ),
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Get.to(FavorittesScreen());
+                },
                 child: DrawerItem(
                     label: "Favorites",
                     verticalMargin: 10,

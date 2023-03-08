@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/Screens/HomeScreen/Controller/CategoryController.dart';
+import 'package:ecommerce_app/Screens/HomeScreen/Controller/ProductController.dart';
 import 'package:ecommerce_app/Screens/HomeScreen/Views/ProductCard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -10,6 +11,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     CategoryController controller = Get.put(CategoryController());
+    ProductController productController = Get.put(ProductController());
     return Scaffold(
       backgroundColor: Color(0xffF2F2F2),
       body: CustomScrollView(
@@ -76,6 +78,8 @@ class HomeScreen extends StatelessWidget {
                   return Obx(() => GestureDetector(
                         onTap: () {
                           controller.onTapped(index);
+                          controller.updateIndex(
+                              controller.list[index].name.toString());
                           print(index);
                         },
                         child: Container(
@@ -105,35 +109,52 @@ class HomeScreen extends StatelessWidget {
                 }),
           )),
           SliverToBoxAdapter(
-              child: Container(
-            height: 350,
-            margin: const EdgeInsets.only(left: 40, top: 20),
-            child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 10,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: GestureDetector(
-                      onTap: () {},
-                      child: ProductCard(),
-                    ),
-                  );
-                }),
+              child: Obx(
+            () => Container(
+              height: 350,
+              margin: const EdgeInsets.only(left: 10, top: 20),
+              child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: productController.products.length,
+                  itemBuilder: (context, index) {
+                    return Obx(
+                      () => Padding(
+                        padding: productController.products[index].category
+                                    .toString() ==
+                                controller.catIndex.toString()
+                            ? EdgeInsets.all(8.0)
+                            : EdgeInsets.all(0.0),
+                        child: productController.products[index].category
+                                    .toString() ==
+                                controller.catIndex.toString()
+                            ? GestureDetector(
+                                onTap: () {},
+                                child: ProductCard(
+                                  product: productController.products[index],
+                                ),
+                              )
+                            : null,
+                      ),
+                    );
+                  }),
+            ),
           )),
           SliverToBoxAdapter(
-            child: Container(
-              margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              height: 40,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: const [
-                  Text(
-                    "Show More -",
-                    style: TextStyle(
-                        color: Colors.purple, fontWeight: FontWeight.bold),
-                  ),
-                ],
+            child: GestureDetector(
+              onTap: () {},
+              child: Container(
+                margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                height: 40,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: const [
+                    Text(
+                      "Show More -",
+                      style: TextStyle(
+                          color: Colors.purple, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
               ),
             ),
           )
