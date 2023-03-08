@@ -18,9 +18,9 @@ class _NavigationMenuState extends State<NavigationMenu> {
   int _index = 0;
   final screens = [
     const HomeScreen(),
-    const FavorittesScreen(),
-    const ProfileScreen(),
-    const CartScreen()
+    FavorittesScreen(),
+    ProfileScreen(),
+    CartScreen()
   ];
 
   @override

@@ -20,106 +20,117 @@ class DetailsScreen extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         child: Stack(
           children: [
-            SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  CarouselSlider(
-                    options: CarouselOptions(
-                      height: 400.0,
-                      viewportFraction: 1.0,
-                    ),
-                    items: product.photos!.map((i) {
-                      return Builder(
-                        builder: (BuildContext context) {
-                          return Container(
-                            width: MediaQuery.of(context).size.width,
-                            margin: EdgeInsets.symmetric(horizontal: 5.0),
-                            // decoration: BoxDecoration(color: Colors.amber),
-                            child: Container(
-                              height: 400,
-                              width: MediaQuery.of(context).size.width,
-                              padding: EdgeInsets.only(top: 40),
-                              child: Image.network(
-                                BASE_URL + "/" + i.url.toString(),
-                                fit: BoxFit.cover,
-                              ),
-                            ),
+            Positioned(
+              top: 0,
+              left: 0,
+              child: Container(
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      CarouselSlider(
+                        options: CarouselOptions(
+                          height: 400.0,
+                          viewportFraction: 1.0,
+                        ),
+                        items: product.photos!.map((i) {
+                          return Builder(
+                            builder: (BuildContext context) {
+                              return Container(
+                                width: MediaQuery.of(context).size.width,
+                                margin: EdgeInsets.symmetric(horizontal: 5.0),
+                                // decoration: BoxDecoration(color: Colors.amber),
+                                child: Container(
+                                  height: 400,
+                                  width: MediaQuery.of(context).size.width,
+                                  padding: EdgeInsets.only(top: 40),
+                                  child: Image.network(
+                                    BASE_URL + "/" + i.url.toString(),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              );
+                            },
                           );
-                        },
-                      );
-                    }).toList(),
+                        }).toList(),
+                      ),
+                      Container(
+                        padding:
+                            const EdgeInsets.only(top: 15, bottom: 5, left: 20),
+                        child: Text(
+                          product.company.toString(),
+                          style: const TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.w200),
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.only(left: 20),
+                        child: Text(
+                          product.title.toString(),
+                          style: const TextStyle(
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: 1.1),
+                        ),
+                      ),
+                      Container(
+                        padding:
+                            const EdgeInsets.only(top: 15, bottom: 5, left: 20),
+                        child: const Text(
+                          "Description",
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: 1.1),
+                        ),
+                      ),
+                      SingleChildScrollView(
+                        child: Container(
+                          height: MediaQuery.of(context).size.height * 0.5,
+                          padding: const EdgeInsets.only(left: 20, right: 20),
+                          child: Text(
+                            product.description.toString(),
+                            style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w400,
+                                letterSpacing: 1.2),
+                          ),
+                        ),
+                      ),
+                      // Spacer(),
+                      // Container(
+                      //   padding: const EdgeInsets.symmetric(
+                      //       horizontal: 20, vertical: 30),
+                      //   child: Row(
+                      //     children: [
+                      //       const Text(
+                      //         "Price:",
+                      //         style: TextStyle(fontWeight: FontWeight.bold),
+                      //       ),
+                      //       const Spacer(),
+                      //       Text(
+                      //         "Rs. ${product.price}",
+                      //         style: const TextStyle(
+                      //             color: Color(0xff5956E9),
+                      //             fontSize: 18,
+                      //             fontWeight: FontWeight.bold),
+                      //       )
+                      //     ],
+                      //   ),
+                      // ),
+                      // Container(
+                      //   height: 90,
+                      //   margin: const EdgeInsets.only(left: 20, right: 20, bottom: 40),
+                      //   decoration: BoxDecoration(
+                      //       borderRadius: BorderRadius.circular(30),
+                      //       color: const Color(0xff5956E9)),
+                      // )
+                    ],
                   ),
-                  Container(
-                    padding:
-                        const EdgeInsets.only(top: 15, bottom: 5, left: 20),
-                    child: Text(
-                      product.company.toString(),
-                      style: const TextStyle(
-                          fontSize: 15, fontWeight: FontWeight.w200),
-                    ),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.only(left: 20),
-                    child: Text(
-                      product.title.toString(),
-                      style: const TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: 1.1),
-                    ),
-                  ),
-                  Container(
-                    padding:
-                        const EdgeInsets.only(top: 15, bottom: 5, left: 20),
-                    child: const Text(
-                      "Description",
-                      style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: 1.1),
-                    ),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.only(left: 20, right: 20),
-                    child: Text(
-                      product.description.toString(),
-                      style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w400,
-                          letterSpacing: 1.2),
-                    ),
-                  ),
-                  // Spacer(),
-                  // Container(
-                  //   padding: const EdgeInsets.symmetric(
-                  //       horizontal: 20, vertical: 30),
-                  //   child: Row(
-                  //     children: [
-                  //       const Text(
-                  //         "Price:",
-                  //         style: TextStyle(fontWeight: FontWeight.bold),
-                  //       ),
-                  //       const Spacer(),
-                  //       Text(
-                  //         "Rs. ${product.price}",
-                  //         style: const TextStyle(
-                  //             color: Color(0xff5956E9),
-                  //             fontSize: 18,
-                  //             fontWeight: FontWeight.bold),
-                  //       )
-                  //     ],
-                  //   ),
-                  // ),
-                  // Container(
-                  //   height: 90,
-                  //   margin: const EdgeInsets.only(left: 20, right: 20, bottom: 40),
-                  //   decoration: BoxDecoration(
-                  //       borderRadius: BorderRadius.circular(30),
-                  //       color: const Color(0xff5956E9)),
-                  // )
-                ],
+                ),
               ),
             ),
             Positioned(
@@ -129,7 +140,14 @@ class DetailsScreen extends StatelessWidget {
                   children: [
                     Container(
                       height: 50,
-                      width: MediaQuery.of(context).size.width * 0.9,
+                      decoration:
+                          BoxDecoration(color: Colors.white, boxShadow: [
+                        BoxShadow(
+                            offset: Offset(0, 0),
+                            blurRadius: 40,
+                            color: Colors.grey.withOpacity(0.4))
+                      ]),
+                      width: MediaQuery.of(context).size.width,
                       padding: const EdgeInsets.symmetric(
                           horizontal: 20, vertical: 10),
                       child: Row(
@@ -150,30 +168,37 @@ class DetailsScreen extends StatelessWidget {
                       ),
                     ),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        print("add to card");
+                      },
                       child: Container(
-                        alignment: Alignment.center,
-                        height: 80,
-                        width: MediaQuery.of(context).size.width * 0.9,
-                        margin: const EdgeInsets.only(
-                            left: 20, right: 20, bottom: 40),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30),
-                            color: Color(0xff5956E9),
-                            boxShadow: [
-                              BoxShadow(
-                                  offset: Offset(0, 10),
-                                  color:
-                                      const Color(0xff5956E9).withOpacity(0.5),
-                                  blurRadius: 20)
-                            ]),
-                        child: const Text(
-                          "Add To Cart",
-                          style: TextStyle(
-                              letterSpacing: 1.3,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 25),
+                        color: Colors.white,
+                        width: MediaQuery.of(context).size.width,
+                        height: 110,
+                        child: Container(
+                          alignment: Alignment.center,
+                          height: 80,
+                          width: MediaQuery.of(context).size.width * 0.9,
+                          margin: const EdgeInsets.only(
+                              left: 20, right: 20, bottom: 40),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(30),
+                              color: Color(0xff5956E9),
+                              boxShadow: [
+                                BoxShadow(
+                                    offset: Offset(0, 10),
+                                    color: const Color(0xff5956E9)
+                                        .withOpacity(0.5),
+                                    blurRadius: 20)
+                              ]),
+                          child: const Text(
+                            "Add To Cart",
+                            style: TextStyle(
+                                letterSpacing: 1.3,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 25),
+                          ),
                         ),
                       ),
                     ),

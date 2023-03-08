@@ -78,6 +78,8 @@ class HomeScreen extends StatelessWidget {
                   return Obx(() => GestureDetector(
                         onTap: () {
                           controller.onTapped(index);
+                          controller.updateIndex(
+                              controller.list[index].name.toString());
                           print(index);
                         },
                         child: Container(
@@ -115,13 +117,23 @@ class HomeScreen extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   itemCount: productController.products.length,
                   itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: GestureDetector(
-                        onTap: () {},
-                        child: ProductCard(
-                          product: productController.products[index],
-                        ),
+                    return Obx(
+                      () => Padding(
+                        padding: productController.products[index].category
+                                    .toString() ==
+                                controller.catIndex.toString()
+                            ? EdgeInsets.all(8.0)
+                            : EdgeInsets.all(0.0),
+                        child: productController.products[index].category
+                                    .toString() ==
+                                controller.catIndex.toString()
+                            ? GestureDetector(
+                                onTap: () {},
+                                child: ProductCard(
+                                  product: productController.products[index],
+                                ),
+                              )
+                            : null,
                       ),
                     );
                   }),

@@ -37,13 +37,15 @@ class ProductCard extends StatelessWidget {
             Positioned(
               top: 0,
               child: Container(
-                height: 200,
+                height: 160,
                 width: 220,
+                margin: EdgeInsets.only(top: 5),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(30),
                   child: Image.network(
                     "https://ecommerce-app-backend.vercel.app/" +
                         product.photos![0].url.toString(),
+                    fit: BoxFit.contain,
                     errorBuilder: (context, error, stackTrace) {
                       return Container(
                         color: Colors.amber,

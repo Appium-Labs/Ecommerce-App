@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 class CategoryController extends GetxController {
   List<CatergoryModel> list = [];
+  var catIndex = RxString("Smartphone");
 
   @override
   void onInit() {
@@ -20,6 +21,12 @@ class CategoryController extends GetxController {
       list[i].isSelected.value = false;
     }
     list[index].isSelected.value = true;
+    update();
+  }
+
+  void updateIndex(String cat) {
+    catIndex.value = cat;
+    print(catIndex);
     update();
   }
 }
