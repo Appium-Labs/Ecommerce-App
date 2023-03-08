@@ -12,6 +12,7 @@ class CartScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Color(0xffF2F2F2),
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: const Text(
