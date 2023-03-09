@@ -1,9 +1,10 @@
-import 'package:ecommerce_app/Screens/CartScreen/CartScreen.dart';
-import 'package:ecommerce_app/Screens/FavoritesScreen/FavoritesScreen.dart';
-import 'package:ecommerce_app/Screens/HomeScreen/Views/HomeScreen.dart';
-import 'package:ecommerce_app/Screens/ProfileScreen/ProfileScreen.dart';
+import 'package:ecommerce_app/UI/pages/CartScreen/CartScreen.dart';
+import 'package:ecommerce_app/UI/pages/FavoritesScreen/FavoritesScreen.dart';
+import 'package:ecommerce_app/UI/pages/HomeScreen/HomeScreen.dart';
+import 'package:ecommerce_app/UI/pages/ProfileScreen/ProfileScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+
 //erhewr
 
 class NavigationMenu extends StatefulWidget {

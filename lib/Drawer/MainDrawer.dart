@@ -1,19 +1,22 @@
 import 'package:ecommerce_app/Drawer/DrawerItem.dart';
-import 'package:ecommerce_app/Features-Login/Model/UserModel.dart';
+import 'package:ecommerce_app/Models/UserModel.dart';
 import 'package:ecommerce_app/NavigationMenu.dart';
-import 'package:ecommerce_app/Screens/CartScreen/CartScreen.dart';
-import 'package:ecommerce_app/Screens/FavoritesScreen/FavoritesScreen.dart';
-import 'package:ecommerce_app/Screens/ProfileScreen/ProfileScreen.dart';
+import 'package:ecommerce_app/UI/pages/CartScreen/CartScreen.dart';
+import 'package:ecommerce_app/UI/pages/FavoritesScreen/FavoritesScreen.dart';
+import 'package:ecommerce_app/UI/pages/ProfileScreen/ProfileScreen.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class MainDrawer extends StatelessWidget {
   const MainDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final prefs = GetStorage();
     return Scaffold(
       backgroundColor: Color(0xff5956E),
       body: SingleChildScrollView(
@@ -85,7 +88,9 @@ class MainDrawer extends StatelessWidget {
               ),
               Spacer(),
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  prefs.remove("token");
+                },
                 child: DrawerItem(
                     label: "LogOut",
                     verticalMargin: 100,
