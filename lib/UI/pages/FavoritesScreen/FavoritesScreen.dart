@@ -1,12 +1,12 @@
 import 'package:ecommerce_app/Controllers/Cart/FavoritesController.dart';
-import 'package:ecommerce_app/Controllers/Products/ProductController.dart';
 import 'package:ecommerce_app/UI/pages/FavoritesScreen/FavoritesCard.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../shared/NoItemsScreen.dart';
+
 class FavorittesScreen extends StatelessWidget {
   FavorittesScreen({super.key});
-  ProductController controller = Get.put(ProductController());
   FavoritesController favController = Get.put(FavoritesController());
   @override
   Widget build(BuildContext context) {
@@ -27,16 +27,24 @@ class FavorittesScreen extends StatelessWidget {
               },
               icon: const Icon(Icons.arrow_back_ios_new)),
         ),
-        body: Center(
-          child: ListView.builder(
-              itemCount: favController.favorites.length,
-              itemBuilder: (context, index) {
-                return Dismissible(
-                    key: Key(favController.favorites[index].sId.toString()),
-                    onDismissed: (direction) {},
-                    child:
-                        FavoritesCard(product: favController.favorites[index]));
-              }),
+        body: Obx(
+          () => favController.favorites.length == 0
+              ? NoItemsScreen(
+                  category: "Favorite Items",
+                  imageURL: "assets/png/EmptyFav.png",
+                )
+              : Center(
+                  child: ListView.builder(
+                      itemCount: favController.favorites.length,
+                      itemBuilder: (context, index) {
+                        return Dismissible(
+                            key: Key(
+                                favController.favorites[index].sId.toString()),
+                            onDismissed: (direction) {},
+                            child: FavoritesCard(
+                                product: favController.favorites[index]));
+                      }),
+                ),
         ));
   }
 }

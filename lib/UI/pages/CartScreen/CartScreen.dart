@@ -1,5 +1,6 @@
 import 'package:ecommerce_app/Controllers/Cart/CartController.dart';
 import 'package:ecommerce_app/UI/pages/CartScreen/AddedProductCard.dart';
+import 'package:ecommerce_app/UI/shared/NoItemsScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -26,16 +27,22 @@ class CartScreen extends StatelessWidget {
               },
               icon: const Icon(Icons.arrow_back_ios_new)),
         ),
-        body: Center(
-          child: ListView.builder(
-              itemCount: controller.cartItems.length,
-              itemBuilder: (context, index) {
-                return Dismissible(
-                    key: Key(controller.cartItems[index].sId.toString()),
-                    onDismissed: (direction) {},
-                    child:
-                        AddedProductCard(product: controller.cartItems[index]));
-              }),
+        body: Obx(
+          () => controller.cartItems.length == 0
+              ? NoItemsScreen(
+                  category: "Cart Items", imageURL: "assets/png/EmptyFav.png")
+              : Center(
+                  child: ListView.builder(
+                      itemCount: controller.cartItems.length,
+                      itemBuilder: (context, index) {
+                        return Dismissible(
+                            key:
+                                Key(controller.cartItems[index].sId.toString()),
+                            onDismissed: (direction) {},
+                            child: AddedProductCard(
+                                product: controller.cartItems[index]));
+                      }),
+                ),
         ));
   }
 }
