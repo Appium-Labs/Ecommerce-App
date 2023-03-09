@@ -1,31 +1,31 @@
-import 'package:ecommerce_app/Features-Login/Views/SplashScreen.dart';
-import 'package:ecommerce_app/x.dart';
+import 'package:ecommerce_app/Features-Login/Views/LoginScreen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import 'package:ecommerce_app/Drawer/DrawerHolder.dart';
-import 'package:ecommerce_app/NavigationMenu.dart';
-import 'package:ecommerce_app/Screens/HomeScreen/Views/HomeScreen.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:get/route_manager.dart';
+import 'package:get_storage/get_storage.dart';
 
-void main() {
-  runApp(GetMaterialApp(home: const MyApp()));
+void main() async {
+  await GetStorage.init();
+  runApp(GetMaterialApp(home: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+  final prefs = GetStorage();
 
+  ///segwr
   @override
   Widget build(BuildContext context) {
+    String? id = prefs.read("token");
+    prefs.write("token", "64072214beb4d9b06fd73bcb");
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
-      home: const DrawerHolder(),
+      home: id != null ? DrawerHolder() : LoginScreen(),
     );
   }
 }
