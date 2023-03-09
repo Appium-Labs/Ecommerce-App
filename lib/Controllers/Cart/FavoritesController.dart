@@ -46,4 +46,24 @@ class FavoritesController extends GetxController {
     addProductToFavorites(BASE_URL + "/api/users/addtofav", jsonBody)
         .then((value) => getFavorties());
   }
+
+  void removeFavorite(String productID) async {
+    final prefs = GetStorage();
+    String? token = prefs.read("token");
+    final temp = AddToFavoritesRequest(token.toString(), productID);
+    var jsonBody = jsonEncode(temp);
+    print(productID);
+    print(BASE_URL + "/api/users/addtofav");
+    addProductToFavorites(BASE_URL + "/api/users/removefromfav", jsonBody)
+        .then((value) => getFavorties());
+  }
+
+  bool isProductInFavorites(String productID) {
+    for (var i = 0; i < favorites.length; i++) {
+      if (favorites[i].sId == productID) {
+        return true;
+      }
+    }
+    return false;
+  }
 }

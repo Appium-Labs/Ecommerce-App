@@ -8,6 +8,7 @@ class CartScreen extends StatelessWidget {
   CartScreen({super.key});
 
   CartController controller = Get.put(CartController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +39,32 @@ class CartScreen extends StatelessWidget {
                         return Dismissible(
                             key:
                                 Key(controller.cartItems[index].sId.toString()),
-                            onDismissed: (direction) {},
+                            onDismissed: (direction) {
+                              Get.dialog(
+                                AlertDialog(
+                                  title: const Text('Remove Item From Cart'),
+                                  content: const Text(
+                                      'Are you sure you want to remove this item from the cart'),
+                                  actions: [
+                                    TextButton(
+                                      child: const Text("No"),
+                                      onPressed: () {
+                                        Get.back();
+                                      },
+                                    ),
+                                    TextButton(
+                                      child: const Text("Yes"),
+                                      onPressed: () {
+                                        controller.removeCartItem(controller
+                                            .cartItems[index].sId
+                                            .toString());
+                                        Get.back();
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
                             child: AddedProductCard(
                                 product: controller.cartItems[index]));
                       }),

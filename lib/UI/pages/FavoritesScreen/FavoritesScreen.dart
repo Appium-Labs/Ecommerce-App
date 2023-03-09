@@ -40,7 +40,11 @@ class FavorittesScreen extends StatelessWidget {
                         return Dismissible(
                             key: Key(
                                 favController.favorites[index].sId.toString()),
-                            onDismissed: (direction) {},
+                            onDismissed: (direction) {
+                              favController.removeFavorite(favController
+                                  .favorites[index].sId
+                                  .toString());
+                            },
                             child: FavoritesCard(
                                 product: favController.favorites[index]));
                       }),

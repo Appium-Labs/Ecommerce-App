@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/Controllers/Cart/CartController.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
@@ -16,6 +17,8 @@ class AddedProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final formatCurrency = new NumberFormat.currency(
         locale: "en-IN", symbol: "Rs. ", decimalDigits: 0);
+
+    CartController controller = Get.put(CartController());
     return GestureDetector(
       onTap: () {
         Get.to(DetailsScreen(product: product));
@@ -84,7 +87,29 @@ class AddedProductCard extends StatelessWidget {
                   ),
                   Spacer(),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Get.dialog(
+                        AlertDialog(
+                          title: const Text('Remove Item From Cart'),
+                          content: const Text(
+                              'Are you sure you want to remove this item from the cart'),
+                          actions: [
+                            TextButton(
+                              child: const Text("No"),
+                              onPressed: () => Get.back(),
+                            ),
+                            TextButton(
+                              child: const Text("Yes"),
+                              onPressed: () {
+                                controller
+                                    .removeCartItem(product.sId.toString());
+                                Get.back();
+                              },
+                            ),
+                          ],
+                        ),
+                      );
+                    },
                     // padding: EdgeInsets.all(5),
                     child: Row(
                       children: [

@@ -20,3 +20,9 @@ Future<void> addProductToCart(String _api, String jsonBody) async {
   print(response.data);
   return;
 }
+
+Future<void> removeFromCart(String _api, String jsonBody) async {
+  Response response = await _dio.POST(_api, jsonBody);
+  print(response.data);
+  return;
+}
