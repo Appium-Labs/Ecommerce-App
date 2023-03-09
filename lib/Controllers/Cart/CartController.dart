@@ -48,4 +48,24 @@ class CartController extends GetxController {
     addProductToFavorites(BASE_URL + "/api/users/addtocart", jsonBody)
         .then((value) => getCartItems());
   }
+
+  void removeCartItem(String productID) async {
+    final prefs = GetStorage();
+    String? token = prefs.read("token");
+    final temp = AddToCartRequest(token.toString(), productID);
+    var jsonBody = jsonEncode(temp);
+    print(productID);
+    print(BASE_URL + "/api/users/addtocart");
+    addProductToFavorites(BASE_URL + "/api/users/removefromcart", jsonBody)
+        .then((value) => getCartItems());
+  }
+
+  bool isProductInCart(String productID) {
+    for (var i = 0; i < cartItems.length; i++) {
+      if (cartItems[i].sId == productID) {
+        return true;
+      }
+    }
+    return false;
+  }
 }

@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecommerce_app/Constants.dart';
 import 'package:ecommerce_app/Controllers/Cart/CartController.dart';
 import 'package:ecommerce_app/Controllers/Cart/FavoritesController.dart';
+import 'package:ecommerce_app/UI/pages/CartScreen/CartScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -173,49 +174,59 @@ class DetailsScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        cartController.addToCart(product.sId.toString());
-                        Get.dialog(
-                          AlertDialog(
-                            title: const Text('Item Added To Cart'),
-                            content: const Text('Hurry Order Now.....'),
-                            actions: [
-                              TextButton(
-                                child: const Text("Close"),
-                                onPressed: () => Get.back(),
+                    Obx(
+                      () => GestureDetector(
+                        onTap: () {
+                          if (cartController
+                              .isProductInCart(product.sId.toString())) {
+                            Get.to(CartScreen());
+                          } else {
+                            cartController.addToCart(product.sId.toString());
+                            Get.dialog(
+                              AlertDialog(
+                                title: const Text('Item Added To Cart'),
+                                content: const Text('Hurry Order Now.....'),
+                                actions: [
+                                  TextButton(
+                                    child: const Text("Close"),
+                                    onPressed: () => Get.back(),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
-                        );
-                      },
-                      child: Container(
-                        color: Colors.white,
-                        width: MediaQuery.of(context).size.width,
-                        height: 110,
+                            );
+                          }
+                        },
                         child: Container(
-                          alignment: Alignment.center,
-                          height: 80,
-                          width: MediaQuery.of(context).size.width * 0.9,
-                          margin: const EdgeInsets.only(
-                              left: 20, right: 20, bottom: 40),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30),
-                              color: Color(0xff5956E9),
-                              boxShadow: [
-                                BoxShadow(
-                                    offset: Offset(0, 10),
-                                    color: const Color(0xff5956E9)
-                                        .withOpacity(0.3),
-                                    blurRadius: 20)
-                              ]),
-                          child: const Text(
-                            "Add To Cart",
-                            style: TextStyle(
-                                letterSpacing: 1.3,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 25),
+                          color: Colors.white,
+                          width: MediaQuery.of(context).size.width,
+                          height: 110,
+                          child: Container(
+                            alignment: Alignment.center,
+                            height: 80,
+                            width: MediaQuery.of(context).size.width * 0.9,
+                            margin: const EdgeInsets.only(
+                                left: 20, right: 20, bottom: 40),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(30),
+                                color: Color(0xff5956E9),
+                                boxShadow: [
+                                  BoxShadow(
+                                      offset: Offset(0, 10),
+                                      color: const Color(0xff5956E9)
+                                          .withOpacity(0.3),
+                                      blurRadius: 20)
+                                ]),
+                            child: Text(
+                              cartController
+                                      .isProductInCart(product.sId.toString())
+                                  ? "Go To Cart"
+                                  : "Add To Cart",
+                              style: TextStyle(
+                                  letterSpacing: 1.3,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 25),
+                            ),
                           ),
                         ),
                       ),
@@ -263,11 +274,26 @@ class DetailsScreen extends StatelessWidget {
                       ]),
                   height: 50,
                   width: 50,
-                  child: IconButton(
-                    icon: SvgPicture.asset("assets/icons/Heart.svg"),
-                    onPressed: () {
-                      controller.addToFavorites(product.sId.toString());
-                    },
+                  child: Obx(
+                    () => IconButton(
+                      icon: controller
+                              .isProductInFavorites(product.sId.toString())
+                          ? Image.asset(
+                              "assets/png/Heart.png",
+                              height: 28,
+                            )
+                          : SvgPicture.asset(
+                              "assets/icons/Heart.svg",
+                            ),
+                      onPressed: () {
+                        if (controller
+                            .isProductInFavorites(product.sId.toString())) {
+                          controller.removeFavorite(product.sId.toString());
+                        } else {
+                          controller.addToFavorites(product.sId.toString());
+                        }
+                      },
+                    ),
                   ),
                 ))
           ],
