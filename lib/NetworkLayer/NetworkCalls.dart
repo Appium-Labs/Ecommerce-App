@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:ecommerce_app/DioRequest.dart';
+import 'package:ecommerce_app/NetworkLayer/DioRequest.dart';
 
 DioRequest _dio = DioRequest();
 

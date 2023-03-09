@@ -16,7 +16,7 @@ class LoginScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: primaryColor,
-      body: SafeArea(
+      body: Center(
         child: CustomScrollView(
           slivers: [
             SliverFillRemaining(
@@ -217,6 +217,7 @@ class LoginContainer extends StatelessWidget {
                       Get.to(DrawerHolder());
                     });
                   }
+                  // Get.back();
                 },
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 12, vertical: 22),

@@ -1,9 +1,11 @@
-import 'package:ecommerce_app/Screens/CartScreen/CartScreen.dart';
-import 'package:ecommerce_app/Screens/FavoritesScreen/FavoritesScreen.dart';
-import 'package:ecommerce_app/Screens/HomeScreen/Views/HomeScreen.dart';
-import 'package:ecommerce_app/Screens/ProfileScreen/ProfileScreen.dart';
+
+import 'package:ecommerce_app/UI/pages/CartScreen/CartScreen.dart';
+import 'package:ecommerce_app/UI/pages/FavoritesScreen/FavoritesScreen.dart';
+import 'package:ecommerce_app/UI/pages/HomeScreen/HomeScreen.dart';
+import 'package:ecommerce_app/UI/pages/ProfileScreen/ProfileScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+
 //erhewr
 
 class NavigationMenu extends StatefulWidget {
@@ -17,7 +19,7 @@ class NavigationMenu extends StatefulWidget {
 class _NavigationMenuState extends State<NavigationMenu> {
   int _index = 0;
   final screens = [
-    HomeScreen(),
+    const HomeScreen(),
     FavorittesScreen(),
     ProfileScreen(),
     CartScreen()
@@ -25,7 +27,6 @@ class _NavigationMenuState extends State<NavigationMenu> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _index = widget.currIndex;
   }

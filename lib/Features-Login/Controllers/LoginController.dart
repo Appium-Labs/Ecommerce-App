@@ -1,10 +1,11 @@
 import 'package:ecommerce_app/Constants.dart';
-import 'package:ecommerce_app/Features-Login/Model/UserModel.dart';
+import 'package:ecommerce_app/Models/User.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get_rx/get_rx.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
-import '../../NetworkCalls.dart';
+import 'package:get_storage/get_storage.dart';
+import '../../NetworkLayer/NetworkCalls.dart';
 
 class LoginController extends GetxController {
   final pageState = "LOGIN".obs;
@@ -12,6 +13,8 @@ class LoginController extends GetxController {
   final hidePassword = true.obs;
   final statusCode = 0.obs;
   bool isLoginButtonClicked = false;
+
+  final prefs = GetStorage();
 
   changePageState(currentState) {
     if (currentState == "LOGIN") {
