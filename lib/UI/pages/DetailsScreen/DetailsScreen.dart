@@ -1,5 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecommerce_app/Constants.dart';
+import 'package:ecommerce_app/Controllers/Cart/CartController.dart';
+import 'package:ecommerce_app/Controllers/Cart/FavoritesController.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -15,6 +17,9 @@ class DetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final formatCurrency = new NumberFormat.currency(
         locale: "en-IN", symbol: "Rs. ", decimalDigits: 0);
+
+    FavoritesController controller = Get.put(FavoritesController());
+    CartController cartController = Get.put(CartController());
     return Scaffold(
       body: Container(
         height: MediaQuery.of(context).size.height,
@@ -170,7 +175,19 @@ class DetailsScreen extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () {
-                        print("add to card");
+                        cartController.addToCart(product.sId.toString());
+                        Get.dialog(
+                          AlertDialog(
+                            title: const Text('Item Added To Cart'),
+                            content: const Text('Hurry Order Now.....'),
+                            actions: [
+                              TextButton(
+                                child: const Text("Close"),
+                                onPressed: () => Get.back(),
+                              ),
+                            ],
+                          ),
+                        );
                       },
                       child: Container(
                         color: Colors.white,
@@ -248,7 +265,9 @@ class DetailsScreen extends StatelessWidget {
                   width: 50,
                   child: IconButton(
                     icon: SvgPicture.asset("assets/icons/Heart.svg"),
-                    onPressed: () {},
+                    onPressed: () {
+                      controller.addToFavorites(product.sId.toString());
+                    },
                   ),
                 ))
           ],
