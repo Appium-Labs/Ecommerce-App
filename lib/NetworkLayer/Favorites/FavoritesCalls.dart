@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:dio/dio.dart';
 import 'package:ecommerce_app/NetworkLayer/DioRequest.dart';
 import 'package:ecommerce_app/Models/UserModel.dart';
@@ -13,4 +15,10 @@ Future<UserModel> getAllFavorites(String _api) async {
   // print(currProducts);
   // return currProducts;
   return res;
+}
+
+Future<void> addProductToFavorites(String _api, String jsonBody) async {
+  Response response = await _dio.POST(_api, jsonBody);
+  print(response.data);
+  return;
 }

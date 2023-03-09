@@ -14,3 +14,9 @@ Future<UserModel> getAllCartItems(String _api) async {
   // return currProducts;
   return res;
 }
+
+Future<void> addProductToCart(String _api, String jsonBody) async {
+  Response response = await _dio.POST(_api, jsonBody);
+  print(response.data);
+  return;
+}
