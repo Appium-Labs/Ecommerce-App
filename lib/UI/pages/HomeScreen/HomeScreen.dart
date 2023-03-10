@@ -91,18 +91,20 @@ class HomeScreen extends StatelessWidget {
                                     height: MediaQuery.of(context).size.height *
                                         0.7,
                                     child: ListView.builder(
-                                        itemCount:
-                                            productController.products.length,
+                                        itemCount: productController
+                                            .fliteredProducts.length,
                                         itemBuilder: (context, index) {
                                           return GestureDetector(
                                               onTap: () {
                                                 Get.to(DetailsScreen(
                                                     product: productController
-                                                        .products[index]));
+                                                            .fliteredProducts[
+                                                        index]));
                                               },
                                               child: ProductGridItem(
                                                   product: productController
-                                                      .products[index]));
+                                                          .fliteredProducts[
+                                                      index]));
                                         }))
                               ])
                             : SliverChildListDelegate([
