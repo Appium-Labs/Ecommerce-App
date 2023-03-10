@@ -19,6 +19,7 @@ class AddToFavoritesRequest {
 
 class FavoritesController extends GetxController {
   RxList<Product> favorites = <Product>[].obs;
+
   @override
   void onInit() {
     // TODO: implement onInit
