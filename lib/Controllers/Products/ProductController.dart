@@ -12,6 +12,7 @@ import '../../../Models/ProductsResponse.dart';
 
 class ProductController extends GetxController {
   RxList<Product> products = <Product>[].obs;
+  RxList<Product> fliteredProducts = <Product>[].obs;
   var firstTimeDone = false.obs;
   var isSearching = false.obs;
 
@@ -41,7 +42,7 @@ class ProductController extends GetxController {
     if (query.isEmpty || query == "") {
       isSearching.value = false;
       update();
-      getAllProducts();
+      fliteredProducts.assignAll(products);
     } else {
       for (var i = 0; i < products.length; i++) {
         if (products[i].company.toString().toLowerCase().contains(query) ||
@@ -50,8 +51,7 @@ class ProductController extends GetxController {
           temp.add(products[i]);
         }
       }
+      fliteredProducts.assignAll(temp as Iterable<Product>);
     }
-    products.assignAll(temp);
-    refresh();
   }
 }
