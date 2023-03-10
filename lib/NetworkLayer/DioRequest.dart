@@ -1,4 +1,3 @@
-
 // import 'dart:html';
 
 import 'package:dio/dio.dart';
@@ -24,8 +23,7 @@ class DioRequest {
           return handler.next(response);
         },
         onError: (e, handler) {
-          print("err");
-          return handler.next(e);
+          print(e);
         },
       ),
     );

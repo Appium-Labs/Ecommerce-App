@@ -26,6 +26,7 @@ class ProductController extends GetxController {
     var temp = res.data!.products!.toList();
     products.assignAll(temp as Iterable<Product>);
     print("prodcuts fetched-------------");
+    print(products);
     products.refresh();
   }
 }

@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/Controllers/Products/ProductController.dart';
+import 'package:ecommerce_app/Feature-Search/Views/Search.dart';
 import 'package:ecommerce_app/UI/pages/HomeScreen/ProductCard.dart';
 import 'package:ecommerce_app/UI/shared/Loading.dart';
 import 'package:ecommerce_app/UI/pages/HomeScreen/AllProductsScreen.dart';
@@ -38,27 +39,36 @@ class HomeScreen extends StatelessWidget {
                           ),
                           SizedBox(
                             width: MediaQuery.of(context).size.width / 1.5,
-                            child: TextField(
-                              decoration: InputDecoration(
-                                  prefixIconConstraints:
-                                      BoxConstraints(maxHeight: 30),
-                                  prefixIcon: Container(
-                                      margin: EdgeInsets.only(left: 15),
-                                      child: SvgPicture.asset(
-                                          "assets/icons/Search.svg")),
-                                  contentPadding: const EdgeInsets.all(18),
-                                  label: Container(
-                                    margin: const EdgeInsets.only(
-                                        left: 8.0, top: 1),
-                                    child: const Text(
-                                      "Search",
-                                      style: TextStyle(fontSize: 15),
-                                    ),
-                                  ),
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(30),
-                                      borderSide: const BorderSide(
-                                          width: 2, color: Colors.black))),
+                            child: GestureDetector(
+                              onTap: () {
+                                print('fgffgfg');
+                                showSearch(
+                                  context: context,
+                                  delegate: Search(),
+                                );
+                              },
+                              child: TextField(
+                                enabled: false,
+                                decoration: InputDecoration(
+                                    hintText: "Search",
+                                    hintStyle:
+                                        TextStyle(fontWeight: FontWeight.w500),
+                                    prefixIconConstraints:
+                                        BoxConstraints(maxHeight: 30),
+                                    prefixIcon: Container(
+                                        margin: EdgeInsets.only(left: 15),
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 8),
+                                          child: SvgPicture.asset(
+                                              "assets/icons/Search.svg"),
+                                        )),
+                                    contentPadding: const EdgeInsets.all(18),
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(30),
+                                        borderSide: const BorderSide(
+                                            width: 2, color: Colors.black))),
+                              ),
                             ),
                           ),
                         ],
