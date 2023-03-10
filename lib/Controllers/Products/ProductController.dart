@@ -45,9 +45,21 @@ class ProductController extends GetxController {
       fliteredProducts.assignAll(products);
     } else {
       for (var i = 0; i < products.length; i++) {
-        if (products[i].company.toString().toLowerCase().contains(query) ||
-            products[i].category.toString().toLowerCase().contains(query) ||
-            products[i].title.toString().toLowerCase().contains(query)) {
+        if (products[i]
+                .company
+                .toString()
+                .toLowerCase()
+                .contains(query.toLowerCase()) ||
+            products[i]
+                .category
+                .toString()
+                .toLowerCase()
+                .contains(query.toLowerCase()) ||
+            products[i]
+                .title
+                .toString()
+                .toLowerCase()
+                .contains(query.toLowerCase())) {
           temp.add(products[i]);
         }
       }
