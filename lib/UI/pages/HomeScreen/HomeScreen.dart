@@ -1,5 +1,4 @@
 import 'package:ecommerce_app/Controllers/Products/ProductController.dart';
-import 'package:ecommerce_app/Feature-Search/Views/Search.dart';
 import 'package:ecommerce_app/UI/pages/HomeScreen/ProductCard.dart';
 import 'package:ecommerce_app/UI/pages/HomeScreen/ProductGridItem.dart';
 import 'package:ecommerce_app/UI/shared/Loading.dart';
