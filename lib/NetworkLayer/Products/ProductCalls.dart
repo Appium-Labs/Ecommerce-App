@@ -10,6 +10,5 @@ Future<ProductsResponse> getAllProductsResponse(String _api) async {
   response = await _dio.GET(_api);
 
   ProductsResponse currProducts = ProductsResponse.fromJson(response.data);
-  // print(currProducts);
   return currProducts;
 }
