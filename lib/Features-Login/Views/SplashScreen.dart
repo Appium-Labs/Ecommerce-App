@@ -27,18 +27,21 @@ class SplashScreen extends StatelessWidget {
                     fontSize: 60,
                     fontFamily: 'Raleway'),
               ),
-              ShaderMask(
-                shaderCallback: (rect) {
-                  return LinearGradient(
-                    begin: Alignment.center,
-                    end: Alignment.bottomCenter,
-                    colors: [Colors.black, Colors.transparent],
-                  ).createShader(Rect.fromLTRB(0, 0, rect.width, rect.height));
-                },
-                blendMode: BlendMode.dstIn,
-                child: Image.asset(
-                  x,
-                  fit: BoxFit.contain,
+              Expanded(
+                child: ShaderMask(
+                  shaderCallback: (rect) {
+                    return LinearGradient(
+                      begin: Alignment.center,
+                      end: Alignment.bottomCenter,
+                      colors: [Colors.black, Colors.transparent],
+                    ).createShader(
+                        Rect.fromLTRB(0, 0, rect.width, rect.height));
+                  },
+                  blendMode: BlendMode.dstIn,
+                  child: Image.asset(
+                    x,
+                    fit: BoxFit.contain,
+                  ),
                 ),
               ),
               GestureDetector(

@@ -236,12 +236,16 @@ class LoginContainer extends StatelessWidget {
                                 emailController.text;
                             loginController.user.value.password =
                                 passwordController.text;
-                            loginController.loginUser();
+                            loginController.loginUser(
+                                emailController.text, passwordController.text);
                             Future.delayed(const Duration(seconds: 3), () {
                               if (loginController.statusCode.value == 201) {
-                                prefs.write(
-                                    "token", loginController.user.value.sId);
-                                Get.off(DrawerHolder());
+                                // prefs.write("token",
+                                //     loginController.user.value.sId!.toString());
+                                print("here -------------------");
+                                Get.offAll(DrawerHolder());
+                                loginController.isLoginButtonClicked.value =
+                                    false;
                               } else {
                                 loginController.isLoginButtonClicked.value =
                                     false;
@@ -485,12 +489,13 @@ class SignupContainer extends StatelessWidget {
                                 passwordController.text;
                             loginController.user.value.name =
                                 nameController.text;
-                            loginController.signUpUser();
+                            loginController.signUpUser(emailController.text,
+                                passwordController.text, nameController.text);
                             Future.delayed(const Duration(seconds: 3), () {
                               if (loginController.statusCode.value == 201) {
-                                prefs.write(
-                                    "token", loginController.user.value.sId);
-                                Get.off(DrawerHolder());
+                                // prefs.write("token",
+                                //     loginController.user.value.sId.toString());
+                                Get.offAll(DrawerHolder());
                               } else {
                                 loginController.isLoginButtonClicked.value =
                                     false;

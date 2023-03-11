@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String? id = prefs.read("token");
+    // prefs.write("token", "640b3e2c5dd959dc32f95560");
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
