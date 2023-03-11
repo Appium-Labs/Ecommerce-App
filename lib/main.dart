@@ -1,10 +1,10 @@
-import 'package:ecommerce_app/Features-Login/Views/LoginScreen.dart';
+import 'package:ecommerce_app/UI/pages/AuthenticationScreens/LoginScreen.dart';
 import 'package:ecommerce_app/PaymentButton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
 
-import 'package:ecommerce_app/Drawer/DrawerHolder.dart';
+import 'package:ecommerce_app/UI/shared/Drawer/DrawerHolder.dart';
 import 'package:get/route_manager.dart';
 import 'package:get_storage/get_storage.dart';
 

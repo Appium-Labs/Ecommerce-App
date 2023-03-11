@@ -1,5 +1,5 @@
 import 'package:ecommerce_app/Constants.dart';
-import 'package:ecommerce_app/Features-Login/Views/LoginScreen.dart';
+import 'package:ecommerce_app/UI/pages/AuthenticationScreens/LoginScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';

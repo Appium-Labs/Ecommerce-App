@@ -1,5 +1,5 @@
 import 'package:ecommerce_app/Constants.dart';
-import 'package:ecommerce_app/Drawer/DrawerHolder.dart';
+import 'package:ecommerce_app/UI/shared/Drawer/DrawerHolder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
-import '../Controllers/LoginController.dart';
+import '../../../Controllers/Authentication/LoginController.dart';
 
 // Obx(()=>LoginContainer());
 class LoginScreen extends StatelessWidget {
