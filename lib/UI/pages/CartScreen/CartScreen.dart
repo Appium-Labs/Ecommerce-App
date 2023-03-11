@@ -9,7 +9,6 @@ class CartScreen extends StatelessWidget {
   CartScreen({super.key});
 
   CartController controller = Get.put(CartController());
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,7 +78,18 @@ class CartScreen extends StatelessWidget {
                       Container(
                         height: 70,
                         width: MediaQuery.of(context).size.width,
-                        child: PaymentButton(),
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                Text("Total: "),
+                                Spacer(),
+                                Text("10000")
+                              ],
+                            ),
+                            PaymentButton(),
+                          ],
+                        ),
                       )
                     ],
                   ),

@@ -28,7 +28,6 @@ class GetClientSecretRequest {
 class CartController extends GetxController {
   RxList<Product> cartItems = <Product>[].obs;
   var clientSecret = "".obs;
-
   @override
   void onInit() {
     // TODO: implement onInit
@@ -80,11 +79,15 @@ class CartController extends GetxController {
   void getClientSecret(int ammount) async {
     var json = GetClientSecretRequest(ammount);
     var jsonBody = jsonEncode(json);
-    var response =
-        await getClientToken(BASE_URL + "/api/users/makepayment", jsonBody);
+    try {
+      var response =
+          await getClientToken(BASE_URL + "/api/users/makepayment", jsonBody);
 
-    clientSecret.value = response.data["client_secret"];
-    update();
+      clientSecret.value = response.data["client_secret"].toString();
+    } catch (err) {
+      print(err);
+    }
+
     print(clientSecret.value);
   }
 }
