@@ -31,7 +31,7 @@ Future<void> removeFromCart(String _api, String jsonBody) async {
 
 Future<Response> getClientToken(String _api, String jsonBody) async {
   Response response = await _dio.POST(_api, jsonBody);
-  // print(response.data!.client_secret);
+  // print("in api call");
   // print(response.data["client_secret"]);
   return response;
 }

@@ -12,7 +12,7 @@ class PaymentButton extends StatelessWidget {
     client_sec = controller.clientSecret.value;
     return ElevatedButton(
         onPressed: () {
-          controller.getClientSecret(1000);
+          controller.getClientSecret(100);
           makePayment();
         },
         child: Text("Pay"));
