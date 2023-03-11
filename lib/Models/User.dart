@@ -35,18 +35,24 @@ class User {
         favourites?.add(Product.fromJson(v));
       });
     }
+
     if (json['cart_items'] != null) {
       cartItems = <Product>[];
+
       json['cart_items'].forEach((v) {
+        print(v);
+        print("in json");
         cartItems?.add(Product.fromJson(v));
       });
     }
+
     if (json['order_history'] != null) {
       orderHistory = <OrderHistory>[];
       json['order_history'].forEach((v) {
         orderHistory?.add(OrderHistory.fromJson(v));
       });
     }
+
     if (json['payment_cards'] != null) {
       paymentCards = <PaymentCards>[];
       json['payment_cards'].forEach((v) {

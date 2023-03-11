@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/Controllers/Products/ProductController.dart';
+import 'package:ecommerce_app/Features-Login/Controllers/LoginController.dart';
 import 'package:ecommerce_app/UI/pages/HomeScreen/ProductCard.dart';
 import 'package:ecommerce_app/UI/pages/HomeScreen/ProductGridItem.dart';
 import 'package:ecommerce_app/UI/shared/Loading.dart';
@@ -18,6 +19,9 @@ class HomeScreen extends StatelessWidget {
     var searchController = TextEditingController();
     CategoryController controller = Get.put(CategoryController());
     ProductController productController = Get.put(ProductController());
+
+    LoginController loginController = Get.put(LoginController());
+    print(loginController.user.value.name.toString() + "  bkjjbjb ");
     return Scaffold(
         backgroundColor: Color(0xffF2F2F2),
         body: Obx(

@@ -1,4 +1,6 @@
 import 'package:ecommerce_app/Drawer/DrawerItem.dart';
+import 'package:ecommerce_app/Features-Login/Views/LoginScreen.dart';
+import 'package:ecommerce_app/Features-Login/Views/SplashScreen.dart';
 import 'package:ecommerce_app/Models/UserModel.dart';
 import 'package:ecommerce_app/UI/shared/NavigationMenu.dart';
 import 'package:ecommerce_app/UI/pages/CartScreen/CartScreen.dart';
@@ -80,6 +82,7 @@ class MainDrawer extends StatelessWidget {
               GestureDetector(
                 onTap: () {
                   prefs.remove("token");
+                  Get.offAll(SplashScreen());
                 },
                 child: DrawerItem(
                     label: "LogOut",
