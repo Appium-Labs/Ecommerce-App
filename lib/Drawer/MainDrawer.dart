@@ -76,16 +76,6 @@ class MainDrawer extends StatelessWidget {
                       onPressed: () {},
                     )),
               ),
-              GestureDetector(
-                onTap: () {},
-                child: DrawerItem(
-                    label: "Settings",
-                    verticalMargin: 10,
-                    icon: IconButton(
-                      icon: SvgPicture.asset("assets/icons/Setting_white.svg"),
-                      onPressed: () {},
-                    )),
-              ),
               Spacer(),
               GestureDetector(
                 onTap: () {

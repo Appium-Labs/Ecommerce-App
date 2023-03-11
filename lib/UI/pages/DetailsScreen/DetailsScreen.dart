@@ -66,7 +66,7 @@ class DetailsScreen extends StatelessWidget {
                       ),
                       Container(
                         padding:
-                            const EdgeInsets.only(top: 15, bottom: 5, left: 20),
+                            const EdgeInsets.only(top: 15, bottom: 0, left: 20),
                         child: Text(
                           product.company.toString(),
                           style: const TextStyle(
@@ -78,14 +78,14 @@ class DetailsScreen extends StatelessWidget {
                         child: Text(
                           product.title.toString(),
                           style: const TextStyle(
-                              fontSize: 30,
+                              fontSize: 28,
                               fontWeight: FontWeight.bold,
-                              letterSpacing: 1.1),
+                              letterSpacing: 1.5),
                         ),
                       ),
                       Container(
                         padding:
-                            const EdgeInsets.only(top: 15, bottom: 5, left: 20),
+                            const EdgeInsets.only(top: 8, bottom: 5, left: 20),
                         child: const Text(
                           "Description",
                           style: TextStyle(
@@ -101,7 +101,7 @@ class DetailsScreen extends StatelessWidget {
                           child: Text(
                             product.description.toString(),
                             style: TextStyle(
-                                fontSize: 15,
+                                fontSize: 14,
                                 fontWeight: FontWeight.w400,
                                 letterSpacing: 1.2),
                           ),
@@ -199,7 +199,7 @@ class DetailsScreen extends StatelessWidget {
                         child: Container(
                           color: Colors.white,
                           width: MediaQuery.of(context).size.width,
-                          height: 110,
+                          height: 90,
                           child: Container(
                             alignment: Alignment.center,
                             height: 80,
@@ -225,7 +225,7 @@ class DetailsScreen extends StatelessWidget {
                                   letterSpacing: 1.3,
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 25),
+                                  fontSize: 22),
                             ),
                           ),
                         ),
