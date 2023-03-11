@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:ecommerce_app/NetworkLayer/DioRequest.dart';
 import 'package:ecommerce_app/Models/UserModel.dart';
@@ -25,4 +27,11 @@ Future<void> removeFromCart(String _api, String jsonBody) async {
   Response response = await _dio.POST(_api, jsonBody);
   print(response.data);
   return;
+}
+
+Future<Response> getClientToken(String _api, String jsonBody) async {
+  Response response = await _dio.POST(_api, jsonBody);
+  // print(response.data!.client_secret);
+  // print(response.data["client_secret"]);
+  return response;
 }

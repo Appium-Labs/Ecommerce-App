@@ -19,8 +19,16 @@ class AddToCartRequest {
   Map toJson() => {'user_id': user_id, 'product_id': product_id};
 }
 
+class GetClientSecretRequest {
+  int ammount;
+  GetClientSecretRequest(this.ammount);
+  Map toJson() => {'ammount': this.ammount};
+}
+
 class CartController extends GetxController {
   RxList<Product> cartItems = <Product>[].obs;
+  var clientSecret = "".obs;
+
   @override
   void onInit() {
     // TODO: implement onInit
@@ -67,5 +75,16 @@ class CartController extends GetxController {
       }
     }
     return false;
+  }
+
+  void getClientSecret(int ammount) async {
+    var json = GetClientSecretRequest(ammount);
+    var jsonBody = jsonEncode(json);
+    var response =
+        await getClientToken(BASE_URL + "/api/users/makepayment", jsonBody);
+
+    clientSecret.value = response.data["client_secret"];
+    update();
+    print(clientSecret.value);
   }
 }

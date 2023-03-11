@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/Controllers/Cart/CartController.dart';
+import 'package:ecommerce_app/PaymentButton.dart';
 import 'package:ecommerce_app/UI/pages/CartScreen/AddedProductCard.dart';
 import 'package:ecommerce_app/UI/shared/NoItemsScreen.dart';
 import 'package:flutter/material.dart';
@@ -32,42 +33,56 @@ class CartScreen extends StatelessWidget {
           () => controller.cartItems.length == 0
               ? NoItemsScreen(
                   category: "Cart Items", imageURL: "assets/png/EmptyFav.png")
-              : Center(
-                  child: ListView.builder(
-                      itemCount: controller.cartItems.length,
-                      itemBuilder: (context, index) {
-                        return Dismissible(
-                            key:
-                                Key(controller.cartItems[index].sId.toString()),
-                            onDismissed: (direction) {
-                              Get.dialog(
-                                AlertDialog(
-                                  title: const Text('Remove Item From Cart'),
-                                  content: const Text(
-                                      'Are you sure you want to remove this item from the cart'),
-                                  actions: [
-                                    TextButton(
-                                      child: const Text("No"),
-                                      onPressed: () {
-                                        Get.back();
-                                      },
-                                    ),
-                                    TextButton(
-                                      child: const Text("Yes"),
-                                      onPressed: () {
-                                        controller.removeCartItem(controller
-                                            .cartItems[index].sId
-                                            .toString());
-                                        Get.back();
-                                      },
-                                    ),
-                                  ],
-                                ),
-                              );
-                            },
-                            child: AddedProductCard(
-                                product: controller.cartItems[index]));
-                      }),
+              : Container(
+                  child: Column(
+                    children: [
+                      Expanded(
+                        // height: MediaQuery.of(context).size.height * 0.66,
+                        child: ListView.builder(
+                            itemCount: controller.cartItems.length,
+                            itemBuilder: (context, index) {
+                              return Dismissible(
+                                  key: Key(controller.cartItems[index].sId
+                                      .toString()),
+                                  onDismissed: (direction) {
+                                    Get.dialog(
+                                      AlertDialog(
+                                        title:
+                                            const Text('Remove Item From Cart'),
+                                        content: const Text(
+                                            'Are you sure you want to remove this item from the cart'),
+                                        actions: [
+                                          TextButton(
+                                            child: const Text("No"),
+                                            onPressed: () {
+                                              Get.back();
+                                            },
+                                          ),
+                                          TextButton(
+                                            child: const Text("Yes"),
+                                            onPressed: () {
+                                              controller.removeCartItem(
+                                                  controller
+                                                      .cartItems[index].sId
+                                                      .toString());
+                                              Get.back();
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                  child: AddedProductCard(
+                                      product: controller.cartItems[index]));
+                            }),
+                      ),
+                      Container(
+                        height: 70,
+                        width: MediaQuery.of(context).size.width,
+                        child: PaymentButton(),
+                      )
+                    ],
+                  ),
                 ),
         ));
   }
