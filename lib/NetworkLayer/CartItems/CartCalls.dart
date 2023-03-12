@@ -17,6 +17,19 @@ Future<UserModel> getAllCartItems(String _api) async {
   return res;
 }
 
+Future<UserModel> getAllOrderItems(String _api) async {
+  Response response;
+  response = await _dio.GET(_api);
+
+  UserModel res = UserModel.fromJson(response.data);
+  print("printing---");
+  print(res.user!.orderHistory!);
+  // print(res.user!.orderHistory!.length);
+  // print(currProducts);
+  // return currProducts;
+  return res;
+}
+
 Future<void> addProductToCart(String _api, String jsonBody) async {
   Response response = await _dio.POST(_api, jsonBody);
   print(response.data);
