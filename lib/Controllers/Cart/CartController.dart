@@ -38,6 +38,7 @@ class CartController extends GetxController {
   void getCartItems() async {
     final prefs = GetStorage();
     String? token = prefs.read("token");
+    print(token);
     UserModel user = await getAllCartItems(
         BASE_URL + "/api/users/profile/" + token.toString());
     var temp = user.user!.cartItems?.toList();

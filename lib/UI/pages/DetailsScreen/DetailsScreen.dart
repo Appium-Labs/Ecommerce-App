@@ -40,19 +40,23 @@ class DetailsScreen extends StatelessWidget {
                     children: [
                       CarouselSlider(
                         options: CarouselOptions(
-                          height: 400.0,
+                          enlargeCenterPage: true,
+                          height: MediaQuery.of(context).size.height / 2.5,
                           viewportFraction: 1.0,
                         ),
                         items: product.photos!.map((i) {
                           return Builder(
                             builder: (BuildContext context) {
                               return Container(
+                                color: Colors.pink,
                                 width: MediaQuery.of(context).size.width,
                                 margin: EdgeInsets.symmetric(horizontal: 5.0),
                                 // decoration: BoxDecoration(color: Colors.amber),
                                 child: Container(
-                                  height: 400,
-                                  width: MediaQuery.of(context).size.width,
+                                  color: Colors.red,
+                                  height:
+                                      MediaQuery.of(context).size.height / 2.7,
+                                  width: MediaQuery.of(context).size.width / 2,
                                   padding: EdgeInsets.only(top: 40),
                                   child: Image.network(
                                     BASE_URL + "/" + i.url.toString(),

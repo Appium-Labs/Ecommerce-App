@@ -22,7 +22,8 @@ class ProductGridItem extends StatelessWidget {
           boxShadow: [
             BoxShadow(
                 offset: Offset(0, 2),
-                color: Colors.grey.withOpacity(0.5),
+                color: Colors.grey.withOpacity(0.2),
+                spreadRadius: 2,
                 blurRadius: 10)
           ]),
       child: Row(

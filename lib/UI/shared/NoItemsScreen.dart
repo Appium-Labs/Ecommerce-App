@@ -12,9 +12,10 @@ class NoItemsScreen extends StatelessWidget {
       child: Column(
         children: [
           Container(
+            // color: Colors.red,
             margin: EdgeInsets.symmetric(vertical: 40),
-            height: 300,
-            width: 400,
+            height: MediaQuery.of(context).size.width,
+            width: MediaQuery.of(context).size.width,
             child: Image(image: AssetImage(imageURL)),
           ),
           Container(
@@ -24,18 +25,21 @@ class NoItemsScreen extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 20),
             margin: EdgeInsets.only(top: 10, bottom: 5),
             child: Text(
-              "No ${category} Yet",
+              "No favorites yet",
               overflow: TextOverflow.clip,
               maxLines: 1,
               style: TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.w700,
-                  letterSpacing: 1.2),
+                fontSize: 28,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ),
           Text(
             "Keep on shopping.....",
-            style: TextStyle(fontWeight: FontWeight.w300, fontSize: 20),
+            style: TextStyle(
+                fontWeight: FontWeight.w400,
+                fontSize: 17,
+                color: Colors.black.withOpacity(0.57)),
           )
         ],
       ),

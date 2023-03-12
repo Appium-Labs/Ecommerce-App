@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 
 import 'package:ecommerce_app/Constants.dart';
@@ -17,19 +16,35 @@ DioRequest _dio = DioRequest();
 class UserLoginRequest {
   String email;
   String password;
-  UserLoginRequest(this.email, this.password);
+  String shipping_address;
+  String profile_photo;
+  UserLoginRequest(
+      this.email, this.password, this.shipping_address, this.profile_photo);
 
-  Map toJson() => {"email": this.email, "password": this.password};
+  Map toJson() => {
+        "email": this.email,
+        "password": this.password,
+        "shipping_address": this.shipping_address,
+        "profile_photo": this.profile_photo
+      };
 }
 
 class UserSignUpRequest {
   String email;
   String password;
+  String shipping_address;
+  String profile_photo;
   String name;
-  UserSignUpRequest(this.email, this.password, this.name);
+  UserSignUpRequest(this.email, this.password, this.name, this.shipping_address,
+      this.profile_photo);
 
-  Map toJson() =>
-      {"email": this.email, "password": this.password, "name": this.name};
+  Map toJson() => {
+        "email": this.email,
+        "password": this.password,
+        "name": this.name,
+        "shipping_address": this.shipping_address,
+        "profile_photo": this.profile_photo,
+      };
 }
 
 class LoginController extends GetxController {
@@ -51,7 +66,8 @@ class LoginController extends GetxController {
 
   void loginUser(String email, String password) async {
     final userResponse = await loginUserResponse(BASE_URL + LOGIN_API_END_POINT,
-        jsonEncode(UserLoginRequest(email, password)));
+        jsonEncode(UserLoginRequest(email, password, "", "")));
+
     print(userResponse.data["user_id"]);
     prefs.write("token", userResponse.data["user_id"]);
     statusCode.value = 201;
@@ -60,20 +76,9 @@ class LoginController extends GetxController {
   signUpUser(String email, String password, String name) async {
     final userResponse = await loginUserResponse(
         BASE_URL + SIGNUP_API_END_POINT,
-        jsonEncode(UserSignUpRequest(email, password, name)));
+        jsonEncode(UserSignUpRequest(email, password, name, "", "")));
     print(userResponse.data["user_id"]);
     prefs.write("token", userResponse.data["user_id"]);
     statusCode.value = 201;
-  }
-
-  getUser(String userId) async {
-    Response response;
-    response = await _dio.GET(BASE_URL + "/api/users/profile/${userId}");
-
-    UserModel res = UserModel.fromJson(response.data);
-    print(res.user!.cartItems!.length);
-    // print(currProducts);
-    // return currProducts;
-    return res;
   }
 }
