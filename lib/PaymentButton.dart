@@ -30,7 +30,9 @@ class PaymentButton extends StatelessWidget {
 
   Future<void> displayPaymentSheet() async {
     try {
-      await Stripe.instance.presentPaymentSheet();
+      await Stripe.instance
+          .presentPaymentSheet()
+          .then((value) => print("done-------"));
     } catch (e) {
       print(e);
     }
