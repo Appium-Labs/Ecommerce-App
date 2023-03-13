@@ -1,5 +1,6 @@
 import 'package:ecommerce_app/Controllers/Cart/CartController.dart';
 import 'package:ecommerce_app/Controllers/Orders/OrderController.dart';
+import 'package:ecommerce_app/Controllers/Profile/ProfileController.dart';
 import 'package:ecommerce_app/UI/pages/OrdersScreen/OrderScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
@@ -10,10 +11,13 @@ class PaymentButton extends StatelessWidget {
   CartController cartController = Get.put(CartController());
   OrdersController ordersController = Get.put(OrdersController());
   PaymentButton({required this.areDetailsAdded});
+
   String client_sec = "";
+
   @override
   Widget build(BuildContext context) {
     CartController controller = Get.put(CartController());
+    ProfileController profileController = Get.put(ProfileController());
     client_sec = controller.clientSecret.value;
     return GestureDetector(
       onTap: () {
@@ -56,8 +60,10 @@ class PaymentButton extends StatelessWidget {
   Future<void> displayPaymentSheet() async {
     try {
       await Stripe.instance.presentPaymentSheet().then((value) {
-        cartController.removeAllCartItems();
-        Get.off(OrdersScree());
+        // Get.delete<OrdersController>();
+        cartController.removeAllCartItems("india");
+        // Get.deleteAll();
+        print("done----- de");
       });
     } catch (e) {
       print(e);
