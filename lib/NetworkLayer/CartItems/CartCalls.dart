@@ -48,3 +48,11 @@ Future<Response> getClientToken(String _api, String jsonBody) async {
   // print(response.data["client_secret"]);
   return response;
 }
+
+Future<void> createOrder(String _api, String jsonBody) async {
+  print("third");
+  print(jsonBody);
+  Response response = await _dio.POST(_api, jsonBody);
+  print(response.data);
+  return;
+}

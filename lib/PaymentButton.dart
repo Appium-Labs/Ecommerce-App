@@ -1,26 +1,23 @@
 import 'package:ecommerce_app/Controllers/Cart/CartController.dart';
 import 'package:ecommerce_app/Controllers/Orders/OrderController.dart';
+import 'package:ecommerce_app/Controllers/Profile/ProfileController.dart';
 import 'package:ecommerce_app/UI/pages/OrdersScreen/OrderScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
 
-class PaymentButton extends StatefulWidget {
+class PaymentButton extends StatelessWidget {
   bool areDetailsAdded;
   CartController cartController = Get.put(CartController());
   OrdersController ordersController = Get.put(OrdersController());
   PaymentButton({required this.areDetailsAdded});
 
-  @override
-  State<PaymentButton> createState() => _PaymentButtonState();
-}
-
-class _PaymentButtonState extends State<PaymentButton> {
   String client_sec = "";
 
   @override
   Widget build(BuildContext context) {
     CartController controller = Get.put(CartController());
+    ProfileController profileController = Get.put(ProfileController());
     client_sec = controller.clientSecret.value;
     return GestureDetector(
       onTap: () {
@@ -33,7 +30,7 @@ class _PaymentButtonState extends State<PaymentButton> {
         alignment: Alignment.center,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            color: widget.areDetailsAdded == true ? Colors.red : Colors.grey,
+            color: areDetailsAdded == true ? Colors.red : Colors.grey,
             boxShadow: [
               BoxShadow(
                   offset: Offset(0, 10),
@@ -63,8 +60,10 @@ class _PaymentButtonState extends State<PaymentButton> {
   Future<void> displayPaymentSheet() async {
     try {
       await Stripe.instance.presentPaymentSheet().then((value) {
-        cartController.removeAllCartItems();
-        Get.off(OrdersScree());
+        // Get.delete<OrdersController>();
+        cartController.removeAllCartItems("india");
+        // Get.deleteAll();
+        print("done----- de");
       });
     } catch (e) {
       print(e);
