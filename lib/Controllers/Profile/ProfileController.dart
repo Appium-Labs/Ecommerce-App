@@ -8,7 +8,6 @@ import 'package:ecommerce_app/Models/UserModel.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:image_picker/image_picker.dart';
-
 import '../../NetworkLayer/NetworkCalls.dart';
 
 class ProfileController extends GetxController {
