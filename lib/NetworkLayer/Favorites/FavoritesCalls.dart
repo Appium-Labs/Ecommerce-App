@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:ffi';
 
 import 'package:dio/dio.dart';
@@ -18,6 +19,8 @@ Future<UserModel> getAllFavorites(String _api) async {
 }
 
 Future<void> addProductToFavorites(String _api, String jsonBody) async {
+  print(jsonBody);
+
   Response response = await _dio.POST(_api, jsonBody);
   print(response.data);
   return;
