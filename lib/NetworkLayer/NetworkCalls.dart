@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:ecommerce_app/Models/OrderHistory.dart';
+import 'package:ecommerce_app/Models/OrderUserModelResponse.dart';
 import 'package:ecommerce_app/Models/UserModel.dart';
 import 'package:ecommerce_app/NetworkLayer/DioRequest.dart';
 
@@ -33,4 +35,17 @@ Future<UserModel> updateUserResponse(api, req) async {
   print(newResponse.data);
   UserModel userModel = UserModel.fromJson(newResponse.data);
   return userModel;
+}
+
+Future<OrderHistory> createOrderResponse(api, req) async {
+  Response response = await _dio.POST(api, req);
+  OrderHistory orderHistory = OrderHistory.fromJson(response.data);
+  return orderHistory;
+}
+
+Future<OrderUserResponse> updateUserOrder(api, req) async {
+  Response response = await _dio.POST(api, req);
+  OrderUserResponse orderUserResponse =
+      OrderUserResponse.fromJson(response.data);
+  return orderUserResponse;
 }

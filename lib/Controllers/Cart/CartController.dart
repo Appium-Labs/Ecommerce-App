@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:ecommerce_app/Constants.dart';
+import 'package:ecommerce_app/Controllers/Orders/OrderController.dart';
 import 'package:ecommerce_app/Models/UserModel.dart';
 import 'package:ecommerce_app/NetworkLayer/CartItems/CartCalls.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +28,7 @@ class GetClientSecretRequest {
 
 class CartController extends GetxController {
   RxList<Product> cartItems = <Product>[].obs;
+  OrdersController ordersController = OrdersController();
   RxBool isLoading = false.obs;
   RxInt cartAmount = 0.obs;
   var clientSecret = "".obs;
@@ -77,6 +79,14 @@ class CartController extends GetxController {
         .then((value) => getCartItems());
   }
 
+  void removeAllCartItems() async {
+    for (var i = 0; i < cartItems.length; i++) {
+      ordersController.cartItemsId.add(cartItems[i].sId!.toString());
+      removeCartItem(cartItems[i].sId!);
+    }
+    cartItems.refresh();
+  }
+
   bool isProductInCart(String productID) {
     for (var i = 0; i < cartItems.length; i++) {
       // cartAmount.value += cartItems[i].price!;
@@ -106,7 +116,6 @@ class CartController extends GetxController {
     } catch (err) {
       print(err);
     }
-
     print(clientSecret.value);
   }
 }

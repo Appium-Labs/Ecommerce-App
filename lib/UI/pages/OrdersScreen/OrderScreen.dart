@@ -30,7 +30,7 @@ class OrdersScree extends StatelessWidget {
       body: Obx(
         () => controller.orders.length == 0 || controller.isLoading.value
             ? NoItemsScreen(
-                category: "Favorite Items",
+                category: "Orders",
                 imageURL: "assets/png/EmptyFav.png",
               )
             : Center(
