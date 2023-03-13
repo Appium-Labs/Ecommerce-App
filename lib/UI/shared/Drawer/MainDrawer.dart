@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/UI/pages/OrdersScreen/OrderScreen.dart';
 import 'package:ecommerce_app/UI/shared/Drawer/DrawerItem.dart';
 import 'package:ecommerce_app/UI/pages/AuthenticationScreens/LoginScreen.dart';
 import 'package:ecommerce_app/UI/pages/AuthenticationScreens/SplashScreen.dart';
@@ -45,7 +46,9 @@ class MainDrawer extends StatelessWidget {
                     )),
               ),
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Get.to(OrdersScree());
+                },
                 child: DrawerItem(
                     label: "My Orders",
                     verticalMargin: 10,

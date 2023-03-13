@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/Controllers/Cart/CartController.dart';
+import 'package:ecommerce_app/Controllers/Profile/ProfileController.dart';
 import 'package:ecommerce_app/PaymentButton.dart';
 import 'package:ecommerce_app/UI/pages/CartScreen/AddedProductCard.dart';
 import 'package:ecommerce_app/UI/shared/NoItemsScreen.dart';
@@ -9,6 +10,8 @@ class CartScreen extends StatelessWidget {
   CartScreen({super.key});
 
   CartController controller = Get.put(CartController());
+  ProfileController profileController = Get.put(ProfileController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,18 +79,45 @@ class CartScreen extends StatelessWidget {
                             }),
                       ),
                       Container(
-                        height: 70,
-                        width: MediaQuery.of(context).size.width,
+                        // color: Colors.yellow,
+                        height: MediaQuery.of(context).size.height / 4,
+                        width: MediaQuery.of(context).size.width / 1.2,
                         child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          // crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text("Total: "),
-                                Spacer(),
-                                Text("10000")
+                                Text(
+                                  "Total Amount :- ",
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                Text(
+                                  "Rs. ${controller.cartAmount.value.toString()}",
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w500),
+                                )
                               ],
                             ),
-                            PaymentButton(),
+                            ShippingDetailsButton(),
+                            profileController.user.value.shipping_address
+                                            ?.isNotEmpty ==
+                                        true &&
+                                    profileController
+                                            .user.value.name?.isNotEmpty ==
+                                        true
+                                ? PaymentButton(
+                                    areDetailsAdded: true,
+                                  )
+                                : AbsorbPointer(
+                                    absorbing: true,
+                                    child: PaymentButton(
+                                      areDetailsAdded: false,
+                                    )),
                           ],
                         ),
                       )
@@ -95,5 +125,37 @@ class CartScreen extends StatelessWidget {
                   ),
                 ),
         ));
+  }
+}
+
+class ShippingDetailsButton extends StatelessWidget {
+  const ShippingDetailsButton({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {},
+      child: Container(
+        width: MediaQuery.of(context).size.width / 1.1,
+        padding: EdgeInsets.symmetric(vertical: 20),
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: Color(0xff5956E9),
+            boxShadow: [
+              BoxShadow(
+                  offset: Offset(0, 10),
+                  color: const Color(0xff5956E9).withOpacity(0.2),
+                  blurRadius: 20)
+            ]),
+        child: Text(
+          "Confirm Shipping Details",
+          style: TextStyle(
+              color: Colors.white, fontWeight: FontWeight.w700, fontSize: 20),
+        ),
+      ),
+    );
   }
 }

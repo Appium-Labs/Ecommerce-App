@@ -1,4 +1,4 @@
-import 'package:ecommerce_app/Controllers/Cart/CartController.dart';
+import 'package:ecommerce_app/Models/OrderHistory.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
@@ -6,28 +6,26 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-import '../../../Models/Product.dart';
+import '../../../../Models/Product.dart';
 import '../DetailsScreen/DetailsScreen.dart';
 
-class AddedProductCard extends StatelessWidget {
+class OrderCard extends StatelessWidget {
   final Product product;
-  const AddedProductCard({super.key, required this.product});
+  final OrderHistory order;
+  const OrderCard({super.key, required this.product, required this.order});
 
   @override
   Widget build(BuildContext context) {
     final formatCurrency = new NumberFormat.currency(
         locale: "en-IN", symbol: "Rs. ", decimalDigits: 0);
-
-    CartController controller = Get.put(CartController());
     return GestureDetector(
       onTap: () {
         Get.to(DetailsScreen(product: product));
       },
       child: Container(
-        // color: Colors.red,
         height: 150,
-        padding: EdgeInsets.only(bottom: 10),
         width: MediaQuery.of(context).size.width,
+        padding: EdgeInsets.only(right: 15),
         margin: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
@@ -58,7 +56,7 @@ class AddedProductCard extends StatelessWidget {
                 children: [
                   Container(
                     margin: const EdgeInsets.only(
-                        top: 35, bottom: 5, left: 0, right: 10),
+                        top: 30, bottom: 5, left: 0, right: 10),
                     child: Text(
                       product.company.toString() +
                           " " +
@@ -72,6 +70,7 @@ class AddedProductCard extends StatelessWidget {
                     margin: const EdgeInsets.only(
                         top: 0, bottom: 5, left: 0, right: 10),
                     child: Text(
+                      // "",
                       "Price:  " + '${formatCurrency.format(product.price)}',
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
@@ -81,57 +80,33 @@ class AddedProductCard extends StatelessWidget {
                     ),
                   ),
                   Container(
+                    margin: const EdgeInsets.only(
+                        top: 0, bottom: 5, left: 0, right: 10),
                     child: Text(
-                      "QTY:  1",
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      // "",
+                      "Status:  " +
+                          '${order.deliveryStatus == true ? "Delivered" : "Not Delivered"}',
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          color: Colors.green,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600),
                     ),
                   ),
-                  Spacer(),
-                  GestureDetector(
-                    onTap: () {
-                      Get.dialog(
-                        AlertDialog(
-                          title: const Text('Remove Item From Cart'),
-                          content: const Text(
-                              'Are you sure you want to remove this item from the cart'),
-                          actions: [
-                            TextButton(
-                              child: const Text("No"),
-                              onPressed: () => Get.back(),
-                            ),
-                            TextButton(
-                              child: const Text("Yes"),
-                              onPressed: () {
-                                controller
-                                    .removeCartItem(product.sId.toString());
-                                Get.back();
-                              },
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                    // padding: EdgeInsets.all(5),
-                    child: Row(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(bottom: 15),
-                          child: Icon(
-                            Icons.delete,
-                            color: Colors.red,
-                            size: 15,
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(left: 2, bottom: 15),
-                          child: Text(
-                            "Remove from cart",
-                            style: TextStyle(color: Colors.red),
-                          ),
-                        ),
-                      ],
+                  Container(
+                    margin: const EdgeInsets.only(
+                        top: 0, bottom: 5, left: 0, right: 10),
+                    child: Text(
+                      // "",
+                      "Date: " + '${order.dateOfPurchase}',
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600),
                     ),
-                  )
+                  ),
+                  // Spacer(),
                 ],
               ),
             )

@@ -7,6 +7,8 @@ class User {
   String? name;
   String? email;
   String? password;
+  String? profile_photo;
+  String? shipping_address;
   List<Product>? favourites;
   List<Product>? cartItems;
   List<OrderHistory>? orderHistory;
@@ -18,6 +20,8 @@ class User {
       this.name,
       this.email,
       this.password,
+      this.profile_photo,
+      this.shipping_address,
       this.favourites,
       this.cartItems,
       this.orderHistory,
@@ -28,6 +32,8 @@ class User {
     sId = json['_id'];
     name = json['name'];
     email = json['email'];
+    profile_photo = json['profile_photo'];
+    shipping_address = json['shipping_address'];
     password = json['password'];
     if (json['favourites'] != null) {
       favourites = <Product>[];
@@ -68,6 +74,8 @@ class User {
     data['name'] = this.name;
     data['email'] = this.email;
     data['password'] = this.password;
+    data['profile_photo'] = this.profile_photo;
+    data['shipping_address'] = this.shipping_address;
     if (this.favourites != null) {
       data['favourites'] = this.favourites?.map((v) => v.toJson()).toList();
     }
