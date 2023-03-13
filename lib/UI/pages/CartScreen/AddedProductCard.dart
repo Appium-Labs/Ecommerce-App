@@ -24,6 +24,7 @@ class AddedProductCard extends StatelessWidget {
         Get.to(DetailsScreen(product: product));
       },
       child: Container(
+        // color: Colors.red,
         height: 150,
         padding: EdgeInsets.only(bottom: 10),
         width: MediaQuery.of(context).size.width,

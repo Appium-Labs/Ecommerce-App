@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/Constants.dart';
 import 'package:ecommerce_app/UI/pages/CartScreen/CartScreen.dart';
 import 'package:ecommerce_app/UI/pages/FavoritesScreen/FavoritesScreen.dart';
 import 'package:ecommerce_app/UI/pages/HomeScreen/HomeScreen.dart';
@@ -44,18 +45,42 @@ class _NavigationMenuState extends State<NavigationMenu> {
             },
             items: [
               BottomNavigationBarItem(
-                  icon: SvgPicture.asset("assets/icons/Profile.svg"),
+                  activeIcon: Container(
+                    child: SvgPicture.asset(
+                      "assets/svg/Home.svg",
+                      color: primaryColor,
+                    ),
+                  ),
+                  icon: SvgPicture.asset("assets/svg/Home.svg"),
                   label: "",
                   backgroundColor: Color(0xffF2F2F2)),
               BottomNavigationBarItem(
+                  activeIcon: Container(
+                    child: SvgPicture.asset(
+                      "assets/icons/Heart.svg",
+                      color: primaryColor,
+                    ),
+                  ),
                   icon: SvgPicture.asset("assets/icons/Heart.svg"),
                   label: "",
                   backgroundColor: Color(0xffF2F2F2)),
               BottomNavigationBarItem(
-                  icon: SvgPicture.asset("assets/icons/Setting.svg"),
+                  activeIcon: Container(
+                    child: SvgPicture.asset(
+                      "assets/icons/Profile.svg",
+                      color: primaryColor,
+                    ),
+                  ),
+                  icon: SvgPicture.asset("assets/icons/Profile.svg"),
                   label: "",
                   backgroundColor: Color(0xffF2F2F2)),
               BottomNavigationBarItem(
+                  activeIcon: Container(
+                    child: SvgPicture.asset(
+                      "assets/icons/Buy.svg",
+                      color: primaryColor,
+                    ),
+                  ),
                   icon: SvgPicture.asset("assets/icons/Buy.svg"),
                   label: "",
                   backgroundColor: Color(0xffF2F2F2))

@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/Constants.dart';
 import 'package:ecommerce_app/Controllers/Products/ProductController.dart';
 import 'package:ecommerce_app/Controllers/Authentication/LoginController.dart';
 import 'package:ecommerce_app/UI/pages/HomeScreen/ProductCard.dart';
@@ -116,7 +117,7 @@ class HomeScreen extends StatelessWidget {
                                   margin: const EdgeInsets.symmetric(
                                       horizontal: 40, vertical: 30),
                                   child: const Text(
-                                    "Check-Out Our Latest Products",
+                                    "Order online collect in store",
                                     style: TextStyle(
                                       fontSize: 30,
                                       fontWeight: FontWeight.bold,
@@ -126,7 +127,7 @@ class HomeScreen extends StatelessWidget {
                                 Container(
                                   height: 30,
                                   margin: const EdgeInsets.symmetric(
-                                      horizontal: 40),
+                                      horizontal: 10),
                                   child: ListView.builder(
                                       scrollDirection: Axis.horizontal,
                                       itemCount: controller.list.length,
@@ -147,9 +148,9 @@ class HomeScreen extends StatelessWidget {
                                                     ? const BoxDecoration(
                                                         border: Border(
                                                             bottom: BorderSide(
-                                                        color: Colors.purple,
+                                                        color: primaryColor,
                                                         width:
-                                                            1.2, // Underline thickness
+                                                            1.5, // Underline thickness
                                                       )))
                                                     : BoxDecoration(),
                                                 margin:
@@ -163,7 +164,7 @@ class HomeScreen extends StatelessWidget {
                                                               .list[index]
                                                               .isSelected
                                                               .value
-                                                          ? Colors.purple
+                                                          ? primaryColor
                                                           : Colors.grey,
                                                       fontWeight: controller
                                                               .list[index]
@@ -227,13 +228,18 @@ class HomeScreen extends StatelessWidget {
                                     height: 40,
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.end,
-                                      children: const [
-                                        Text(
-                                          "Show More -",
+                                      children: [
+                                        const Text(
+                                          "see more",
                                           style: TextStyle(
-                                              color: Colors.purple,
-                                              fontWeight: FontWeight.bold),
+                                              color: primaryColor,
+                                              fontWeight: FontWeight.w700),
                                         ),
+                                        SizedBox(
+                                          width: 8,
+                                        ),
+                                        SvgPicture.asset(
+                                            "assets/svg/arrow.svg"),
                                       ],
                                     ),
                                   ),
