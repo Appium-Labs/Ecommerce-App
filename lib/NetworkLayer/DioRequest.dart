@@ -8,26 +8,26 @@ class DioRequest {
 
   DioRequest() {
     print("gfg");
-    initializeInterceptors();
+    // initializeInterceptors();
   }
-  initializeInterceptors() async {
-    print("inside interceptors");
-    _dio.interceptors.add(
-      InterceptorsWrapper(
-        onRequest: (options, handler) {
-          print(options.method);
-          return handler.next(options);
-        },
-        onResponse: (response, handler) {
-          // print(response.data);
-          return handler.next(response);
-        },
-        onError: (e, handler) {
-          print(e);
-        },
-      ),
-    );
-  }
+  // initializeInterceptors() async {
+  //   print("inside interceptors");
+  //   _dio.interceptors.add(
+  //     InterceptorsWrapper(
+  //       onRequest: (options, handler) {
+  //         print(options.baseUrl);
+  //         return handler.next(options);
+  //       },
+  //       onResponse: (response, handler) {
+  //         // print(response.data);
+  //         return handler.next(response);
+  //       },
+  //       onError: (e, handler) {
+  //         print(e);
+  //       },
+  //     ),
+  //   );
+  // }
 
   Future<Response> GET(_api) async {
     Response response;

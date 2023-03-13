@@ -1,10 +1,14 @@
 import 'package:ecommerce_app/Controllers/Cart/CartController.dart';
+import 'package:ecommerce_app/Controllers/Orders/OrderController.dart';
+import 'package:ecommerce_app/UI/pages/OrdersScreen/OrderScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
 
 class PaymentButton extends StatelessWidget {
   bool areDetailsAdded;
+  CartController cartController = Get.put(CartController());
+  OrdersController ordersController = Get.put(OrdersController());
   PaymentButton({required this.areDetailsAdded});
   String client_sec = "";
   @override
@@ -48,11 +52,13 @@ class PaymentButton extends StatelessWidget {
         .then((value) => displayPaymentSheet());
   }
 
+//4242 4242 4242 424242
   Future<void> displayPaymentSheet() async {
     try {
-      await Stripe.instance
-          .presentPaymentSheet()
-          .then((value) => print("done-------"));
+      await Stripe.instance.presentPaymentSheet().then((value) {
+        cartController.removeAllCartItems();
+        Get.off(OrdersScree());
+      });
     } catch (e) {
       print(e);
     }
