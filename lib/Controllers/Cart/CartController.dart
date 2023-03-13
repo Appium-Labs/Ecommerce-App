@@ -27,15 +27,19 @@ class GetClientSecretRequest {
 
 class CartController extends GetxController {
   RxList<Product> cartItems = <Product>[].obs;
+  RxBool isLoading = false.obs;
+  RxInt cartAmount = 0.obs;
   var clientSecret = "".obs;
   @override
   void onInit() {
     // TODO: implement onInit
     super.onInit();
     getCartItems();
+    getCartAmount();
   }
 
   void getCartItems() async {
+    print("-------**********************----------------");
     final prefs = GetStorage();
     String? token = prefs.read("token");
     print(token);
@@ -44,9 +48,11 @@ class CartController extends GetxController {
     var temp = user.user!.cartItems?.toList();
     cartItems.assignAll(temp as Iterable<Product>);
     cartItems.refresh();
+    getCartAmount();
   }
 
   void addToCart(String productID) async {
+    isLoading.value = true;
     final prefs = GetStorage();
     String? token = prefs.read("token");
     final temp = AddToCartRequest(token.toString(), productID);
@@ -54,7 +60,10 @@ class CartController extends GetxController {
     print(productID);
     print(BASE_URL + "/api/users/addtocart");
     addProductToFavorites(BASE_URL + "/api/users/addtocart", jsonBody)
-        .then((value) => getCartItems());
+        .then((value) {
+      isLoading.value = false;
+      getCartItems();
+    });
   }
 
   void removeCartItem(String productID) async {
@@ -70,11 +79,20 @@ class CartController extends GetxController {
 
   bool isProductInCart(String productID) {
     for (var i = 0; i < cartItems.length; i++) {
+      // cartAmount.value += cartItems[i].price!;
       if (cartItems[i].sId == productID) {
         return true;
       }
     }
     return false;
+  }
+
+  void getCartAmount() {
+    print("+++++++++++++++++++++++");
+    cartAmount.value = 0;
+    for (var i = 0; i < cartItems.length; i++) {
+      cartAmount.value += cartItems[i].price!;
+    }
   }
 
   void getClientSecret(int ammount) async {

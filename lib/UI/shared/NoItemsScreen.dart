@@ -25,7 +25,7 @@ class NoItemsScreen extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 20),
             margin: EdgeInsets.only(top: 10, bottom: 5),
             child: Text(
-              "No favorites yet",
+              "No ${category} yet",
               overflow: TextOverflow.clip,
               maxLines: 1,
               style: TextStyle(
