@@ -20,6 +20,21 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xffF2F2F2),
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: const Text(
+          "Profile",
+          style: TextStyle(color: Colors.black),
+        ),
+        leading: IconButton(
+            color: Colors.black,
+            onPressed: () {
+              Get.back();
+            },
+            icon: const Icon(Icons.arrow_back_ios_new)),
+      ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 42, vertical: 200),
         child: Obx(
@@ -81,7 +96,7 @@ class ProfileScreen extends StatelessWidget {
                                 // overflow: TextOverflow.fade,
                                 maxLines: 2,
                                 style: TextStyle(
-                                  fontSize: 15,
+                                  fontSize: 18,
                                   fontWeight: FontWeight.w400,
                                 ),
                               ),
@@ -179,7 +194,7 @@ class ProfileScreen extends StatelessWidget {
                                                 Future.delayed(
                                                     const Duration(seconds: 3),
                                                     () {
-// Here you can write your code
+                                                  Get.back();
                                                 });
                                               }
                                             },
@@ -201,7 +216,30 @@ class ProfileScreen extends StatelessWidget {
                                                     fontWeight:
                                                         FontWeight.bold),
                                               ),
-                                            ))
+                                            )),
+                                        GestureDetector(
+                                          onTap: () {
+                                            Get.back();
+                                          },
+                                          child: Container(
+                                            padding: EdgeInsets.all(12),
+                                            decoration: BoxDecoration(
+                                              color: Colors.red,
+                                            ),
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                3,
+                                            child: Text(
+                                              "Close",
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                        )
                                       ]),
                                   (profileController.isLoading.value == true)
                                       ? CircularProgressIndicator()

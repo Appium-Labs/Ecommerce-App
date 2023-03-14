@@ -36,36 +36,6 @@ class OrdersController extends GetxController {
     getOrderedProducts();
   }
 
-  // void createOrder() async {
-  //   final prefs = GetStorage();
-  //   String? token = prefs.read("token");
-  //   // orderModel.value.user_id = token.toString();
-  //   Map<String, dynamic> req = orderModel.value.toJson();
-  //   req['user_id'] = token.toString();
-  //   cartItemsId.map((element) async {
-  //     req["product_id"] = element.toString();
-  //     OrderHistory orderHistory = await createOrderResponse(
-  //         "https://ecommerce-app-backend.vercel.app/api/orders", req);
-  //     ordersId.add(orderHistory.sId!);
-  //     print(ordersId);
-  //   });
-  //   addToUser();
-  // }
-
-  // void addToUser() async {
-  //   final prefs = GetStorage();
-  //   String? token = prefs.read("token");
-  //   orderUserResponse.value.userId = token.toString();
-  //   orderUserResponse.value.orderId = "";
-  //   Map<String, dynamic> req = orderUserResponse.value.toJson();
-  //   ordersId.map((element) async {
-  //     req["order_id"] = element.toString();
-  //     OrderUserResponse orderUserResponse = await updateUserOrder(
-  //         "https://ecommerce-app-backend.vercel.app/api/users/addorder", req);
-  //     print(orderUserResponse);
-  //   });
-  // }
-
   void getOrderedProducts() async {
     isLoading.value = true;
     update();
@@ -76,18 +46,19 @@ class OrdersController extends GetxController {
     var temp = user.user!.orderHistory?.toList();
     orderDetails.assignAll(temp as Iterable<OrderHistory>);
     orderDetails.refresh();
-    // print(temp![0].sId);
+
+    var curr = <Product>[];
 
     for (var i = 0; i < products.length; i++) {
       for (var j = 0; j < temp!.length; j++) {
-        // print(products[i].sId.toString());
         if (products[i].sId.toString() == temp[j].productId.toString()) {
-          orders.add(products[i]);
+          curr.add(products[i]);
         }
       }
     }
     print("orders-------");
     print(orders);
+    orders.assignAll(curr);
     orders.refresh();
     isLoading.value = false;
     update();

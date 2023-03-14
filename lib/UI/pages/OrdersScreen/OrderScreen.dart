@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/Constants.dart';
 import 'package:ecommerce_app/Controllers/Orders/OrderController.dart';
 import 'package:ecommerce_app/UI/pages/OrdersScreen/OrderCard.dart';
 import 'package:flutter/material.dart';
@@ -29,14 +30,21 @@ class OrdersScree extends StatelessWidget {
       ),
       body: Obx(
         () => controller.orders.length == 0 || controller.isLoading.value
-            ? NoItemsScreen(
-                category: "Orders",
-                imageURL: "assets/png/EmptyFav.png",
-              )
+            ? controller.isLoading.value
+                ? Center(
+                    child: CircularProgressIndicator(
+                    color: primaryColor,
+                  ))
+                : NoItemsScreen(
+                    category: "Orders",
+                    imageURL: "assets/png/EmptyFav.png",
+                  )
             : Center(
                 child: ListView.builder(
                     itemCount: controller.orders.length,
                     itemBuilder: (context, index) {
+                      print(controller.orders.length);
+                      print(controller.orderDetails.length);
                       return OrderCard(
                         product: controller.orders[index],
                         order: controller.orderDetails[index],
