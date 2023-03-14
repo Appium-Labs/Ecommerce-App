@@ -65,8 +65,8 @@ class ProfileController extends GetxController {
       await updateUserResponse(BASE_URL + "/api/users/profile/${token}", req)
           .then((value) {
         user.value = value.user!;
-        isLoading.value = false;
       });
+      isLoading.value = false;
 
       // print(updateUser.user!.email);
     } on Exception catch (e) {

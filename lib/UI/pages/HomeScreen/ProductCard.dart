@@ -1,6 +1,7 @@
 import 'package:ecommerce_app/Constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../../../Models/Product.dart';
 import '../DetailsScreen/DetailsScreen.dart';
@@ -11,6 +12,8 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final formatCurrency = new NumberFormat.currency(
+        locale: "en-IN", symbol: "Rs. ", decimalDigits: 0);
     return GestureDetector(
       onTap: () => Get.to(DetailsScreen(
         product: product,
@@ -101,7 +104,7 @@ class ProductCard extends StatelessWidget {
                         textAlign: TextAlign.center,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 3,
-                        "Rs. ${product.price.toString()}",
+                        "${formatCurrency.format(product.price)}",
                         style: TextStyle(
                             color: primaryColor,
                             fontSize: 15,

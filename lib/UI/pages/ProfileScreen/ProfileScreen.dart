@@ -4,6 +4,7 @@ import 'dart:typed_data';
 
 import 'package:ecommerce_app/Constants.dart';
 import 'package:ecommerce_app/Controllers/Profile/ProfileController.dart';
+import 'package:ecommerce_app/UI/pages/OrdersScreen/OrderScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -19,6 +20,21 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xffF2F2F2),
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: const Text(
+          "Profile",
+          style: TextStyle(color: Colors.black),
+        ),
+        leading: IconButton(
+            color: Colors.black,
+            onPressed: () {
+              Get.back();
+            },
+            icon: const Icon(Icons.arrow_back_ios_new)),
+      ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 42, vertical: 200),
         child: Obx(
@@ -80,7 +96,7 @@ class ProfileScreen extends StatelessWidget {
                                 // overflow: TextOverflow.fade,
                                 maxLines: 2,
                                 style: TextStyle(
-                                  fontSize: 15,
+                                  fontSize: 18,
                                   fontWeight: FontWeight.w400,
                                 ),
                               ),
@@ -106,78 +122,130 @@ class ProfileScreen extends StatelessWidget {
                             // color: Colors.white,
                             padding: EdgeInsets.all(16),
                             child: Center(
-                                child: Stack(
-                              children: [
-                                Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      TextField(
-                                        controller: name,
-                                        scrollPadding: EdgeInsets.all(0),
-                                        cursorColor: primaryColor,
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w600,
-                                            color: Colors.black,
-                                            fontSize: 17),
-                                        decoration: const InputDecoration(
-                                            hintText: "Enter your name",
-                                            isDense: true,
-                                            contentPadding:
-                                                EdgeInsets.symmetric(
-                                                    horizontal: 10,
-                                                    vertical: 10),
-                                            border: UnderlineInputBorder(
-                                                borderSide: BorderSide(
-                                                    color: primaryColor)),
-                                            focusedBorder: UnderlineInputBorder(
-                                                borderSide: BorderSide(
-                                                    color: primaryColor))),
-                                      ),
-                                      TextField(
-                                        controller: address,
-                                        scrollPadding: EdgeInsets.all(0),
-                                        cursorColor: primaryColor,
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w600,
-                                            color: Colors.black,
-                                            fontSize: 17),
-                                        decoration: const InputDecoration(
-                                            hintText: "Enter your address",
-                                            isDense: true,
-                                            contentPadding:
-                                                EdgeInsets.symmetric(
-                                                    horizontal: 10,
-                                                    vertical: 10),
-                                            border: UnderlineInputBorder(
-                                                borderSide: BorderSide(
-                                                    color: primaryColor)),
-                                            focusedBorder: UnderlineInputBorder(
-                                                borderSide: BorderSide(
-                                                    color: primaryColor))),
-                                      ),
-                                      ElevatedButton(
-                                          onPressed: () {
-                                            if (name.isBlank == false ||
-                                                address.isBlank == false) {
-                                              profileController
-                                                  .isLoading.value = true;
-                                              profileController
-                                                  .user.value.name = name.text;
-                                              profileController.user.value
-                                                      .shipping_address =
-                                                  address.text;
+                                child: Obx(
+                              () => Stack(
+                                alignment: Alignment.center,
+                                children: [
+                                  Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        TextField(
+                                          controller: name,
+                                          scrollPadding: EdgeInsets.all(0),
+                                          cursorColor: primaryColor,
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w600,
+                                              color: Colors.black,
+                                              fontSize: 17),
+                                          decoration: const InputDecoration(
+                                              hintText: "Enter your name",
+                                              isDense: true,
+                                              contentPadding:
+                                                  EdgeInsets.symmetric(
+                                                      horizontal: 10,
+                                                      vertical: 10),
+                                              border: UnderlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      color: primaryColor)),
+                                              focusedBorder:
+                                                  UnderlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                          color:
+                                                              primaryColor))),
+                                        ),
+                                        TextField(
+                                          controller: address,
+                                          scrollPadding: EdgeInsets.all(0),
+                                          cursorColor: primaryColor,
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w600,
+                                              color: Colors.black,
+                                              fontSize: 17),
+                                          decoration: const InputDecoration(
+                                              hintText: "Enter your address",
+                                              isDense: true,
+                                              contentPadding:
+                                                  EdgeInsets.symmetric(
+                                                      horizontal: 10,
+                                                      vertical: 10),
+                                              border: UnderlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      color: primaryColor)),
+                                              focusedBorder:
+                                                  UnderlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                          color:
+                                                              primaryColor))),
+                                        ),
+                                        GestureDetector(
+                                            onTap: () {
+                                              if (name.text != "" ||
+                                                  address.text != "") {
+                                                profileController
+                                                    .isLoading.value = true;
+                                                profileController.user.value
+                                                    .name = name.text;
+                                                profileController.user.value
+                                                        .shipping_address =
+                                                    address.text;
 
-                                              profileController.updateUser();
-                                              // profileController.refresh();
-                                            }
+                                                profileController.updateUser();
+                                                Future.delayed(
+                                                    const Duration(seconds: 3),
+                                                    () {
+                                                  Get.back();
+                                                });
+                                              }
+                                            },
+                                            child: Container(
+                                              padding: EdgeInsets.all(12),
+                                              decoration: BoxDecoration(
+                                                color: primaryColor,
+                                              ),
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  2,
+                                              child: Text(
+                                                "Update my info",
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 18,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            )),
+                                        GestureDetector(
+                                          onTap: () {
+                                            Get.back();
                                           },
-                                          child: Text("Save my info"))
-                                    ]),
-                                (profileController.isLoading.value == true)
-                                    ? CircularProgressIndicator()
-                                    : Container(),
-                              ],
+                                          child: Container(
+                                            padding: EdgeInsets.all(12),
+                                            decoration: BoxDecoration(
+                                              color: Colors.red,
+                                            ),
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                3,
+                                            child: Text(
+                                              "Close",
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                        )
+                                      ]),
+                                  (profileController.isLoading.value == true)
+                                      ? CircularProgressIndicator()
+                                      : Container(),
+                                ],
+                              ),
                             )),
                           ),
                         ),
@@ -190,20 +258,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Get.dialog(
-                      Scaffold(
-                        backgroundColor: Colors.transparent,
-                        body: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Colors.white),
-                          width: MediaQuery.of(context).size.width / 1.2,
-                          height: MediaQuery.of(context).size.height / 2,
-                          // color: Colors.white,
-                          padding: EdgeInsets.all(16),
-                        ),
-                      ),
-                    );
+                    Get.to(OrdersScree());
                   },
                   child: Card(
                     text: "Order history",

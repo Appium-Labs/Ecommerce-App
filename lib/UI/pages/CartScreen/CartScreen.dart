@@ -2,9 +2,11 @@ import 'package:ecommerce_app/Controllers/Cart/CartController.dart';
 import 'package:ecommerce_app/Controllers/Profile/ProfileController.dart';
 import 'package:ecommerce_app/PaymentButton.dart';
 import 'package:ecommerce_app/UI/pages/CartScreen/AddedProductCard.dart';
+import 'package:ecommerce_app/UI/pages/ProfileScreen/ProfileScreen.dart';
 import 'package:ecommerce_app/UI/shared/NoItemsScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class CartScreen extends StatelessWidget {
   CartScreen({super.key});
@@ -14,6 +16,8 @@ class CartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final formatCurrency = new NumberFormat.currency(
+        locale: "en-IN", symbol: "Rs. ", decimalDigits: 0);
     return Scaffold(
         backgroundColor: Color(0xffF2F2F2),
         appBar: AppBar(
@@ -96,7 +100,7 @@ class CartScreen extends StatelessWidget {
                                       fontWeight: FontWeight.w500),
                                 ),
                                 Text(
-                                  "Rs. ${controller.cartAmount.value.toString()}",
+                                  "${formatCurrency.format(controller.cartAmount.value)}",
                                   style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.w500),
@@ -136,7 +140,9 @@ class ShippingDetailsButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Get.to(ProfileScreen());
+      },
       child: Container(
         width: MediaQuery.of(context).size.width / 1.1,
         padding: EdgeInsets.symmetric(vertical: 20),

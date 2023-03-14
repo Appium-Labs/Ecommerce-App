@@ -19,9 +19,6 @@ class OrderCard extends StatelessWidget {
     final formatCurrency = new NumberFormat.currency(
         locale: "en-IN", symbol: "Rs. ", decimalDigits: 0);
     return GestureDetector(
-      onTap: () {
-        Get.to(DetailsScreen(product: product));
-      },
       child: Container(
         height: 150,
         width: MediaQuery.of(context).size.width,
