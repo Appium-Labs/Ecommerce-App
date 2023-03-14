@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/Controllers/Authentication/LoginController.dart';
 import 'package:ecommerce_app/Controllers/Cart/CartController.dart';
 import 'package:ecommerce_app/Controllers/Orders/OrderController.dart';
 import 'package:ecommerce_app/Controllers/Profile/ProfileController.dart';
@@ -10,6 +11,7 @@ class PaymentButton extends StatelessWidget {
   bool areDetailsAdded;
   CartController cartController = Get.put(CartController());
   OrdersController ordersController = Get.put(OrdersController());
+  LoginController loginController = Get.put(LoginController());
   PaymentButton({required this.areDetailsAdded});
 
   String client_sec = "";
@@ -18,6 +20,7 @@ class PaymentButton extends StatelessWidget {
   Widget build(BuildContext context) {
     CartController controller = Get.put(CartController());
     ProfileController profileController = Get.put(ProfileController());
+
     client_sec = controller.clientSecret.value;
     return GestureDetector(
       onTap: () {
@@ -61,8 +64,16 @@ class PaymentButton extends StatelessWidget {
     try {
       await Stripe.instance.presentPaymentSheet().then((value) {
         // Get.delete<OrdersController>();
-        cartController.removeAllCartItems("india");
+        cartController.removeAllCartItems(
+            loginController.user.value.shipping_address.toString());
+        ordersController.isLoading.value = true;
+        Future.delayed(const Duration(seconds: 5), () {
+// Here you can write your code
+          ordersController.getOrderedProducts();
+        });
+
         // Get.deleteAll();
+        Get.to(OrdersScree());
         print("done----- de");
       });
     } catch (e) {
